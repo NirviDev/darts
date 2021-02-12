@@ -1,0 +1,38 @@
+.tab-content {
+  min-width: 100%;
+}
+
+.nav-link {
+  color: rgb(255, 255, 255);
+}
+
+.score-counter {
+  color: rgb(255, 255, 255);
+}
+
+.digit-text {
+  font-family: fantasy;
+  font-size: 6rem;
+}
+
+.score-panel-footer {
+  background-color: rgb(36, 209, 163);
+  position: fixed;
+  width: 50% !important;
+  bottom: 0;
+  left: 0;
+}
+
+.dart-point {
+  width: 100px;
+  height: 100px;
+  margin: auto;
+  font-size: 3rem;
+  text-align: center;
+  line-height: 100px;
+}
+
+.dart-point img {
+  width: 100px;
+  height: 100px;
+}

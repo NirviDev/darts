@@ -1,0 +1,12 @@
+.game-panel {
+  min-height: 100vh;
+  padding-top: 70px;
+}
+
+#score-panel {
+  background-color: rgba(44, 178, 188, 0.8);
+}
+
+#dartboard-panel {
+  background-color: rgb(214, 214, 214);
+}

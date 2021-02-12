@@ -1,0 +1,44 @@
+<ngb-accordion #acc="ngbAccordion" [closeOthers]="true" activeIds="static-0">
+  <ngb-panel
+  *ngFor="let match of matches; let i = index"
+    id="static-{{ i }}">
+    <ng-template ngbPanelHeader>
+      <div class="d-flex align-items-center justify-content-between">
+        <button
+          ngbPanelToggle
+          class="btn container-fluid text-center pr-0 pl-0 panelHeader"
+        >
+          <div class="row">
+            <div class="col text-right">
+              <h4>{{ match.player1.playerId }}</h4>
+            </div>
+            <div class="col-1">
+              <h4>VS</h4>
+            </div>
+            <div class="col text-left">
+              <h4>{{ match.player2.playerId }}</h4>
+            </div>
+          </div>
+        </button>
+      </div>
+    </ng-template>
+    <ng-template ngbPanelContent>
+      <div class="row">
+        <div class="col text-center">
+          <h4>{{ match.player1.firstName }} {{ match.player1.lastName }}</h4>
+          <img class="img-fluid m-3 border" [src]="match.player1.avatarUrl" alt="" />
+        </div>
+        <div class="col-4 pt-3 text-center">
+          <h5>Legs to win: {{ match.legsToWin }}</h5>
+          <h5>{{ match.player1.firstName }} {{ match.player1.lastName }} score: {{ match.player1Score }}</h5>
+          <h5>{{ match.player2.firstName }} {{ match.player2.lastName }} score: {{ match.player2Score }}</h5>
+          <button routerLink="/game" class="btn btn-info m-3 px-5 rounded-pill border-dark btn-shadow" (click)="onFetchLegs(match.matchId)">Legs</button>
+        </div>
+        <div class="col text-center">
+          <h4>{{ match.player2.firstName }} {{ match.player2.lastName }}</h4>
+          <img class="img-fluid m-3 border" [src]="match.player2.avatarUrl" alt="" />
+        </div>
+      </div>
+    </ng-template>
+  </ngb-panel>
+</ngb-accordion>

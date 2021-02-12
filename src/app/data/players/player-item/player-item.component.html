@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col-12 mt-2 text-center">
+    <h4>{{ player.playerId }}</h4>
+    <hr/>
+  </div>
+  <img
+    class="img-responsive m-3 mt-0 border border-dark"
+    width="100"
+    height="100"
+    [src]="
+      player.avatarUrl !== null
+        ? player.avatarUrl
+        : 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAADjUlEQVR4Xu2YPYsyQRCEx1PBQANRRAQRExP//78wNTEREVRETUz8xJdeaOmb2w9nZV/Ku9pwnXFr6unqmd3SZDJ5OF4wDpQIBIZFJIRAsHgQCBgPAiEQNAfA9HAPIRAwB8DkMCEEAuYAmBwmhEDAHACTw4QQCJgDYHKYEAIBcwBMDhNCIGAOgMlhQggEzAEwOUwIgYA5ACaHCSEQMAfA5DAhBALmAJgcJoRAwBwAk8OEEAiYA2BymBACAXMATA4TQiBgDoDJYUIIBMwBMDlMCIGAOQAmhwkhEDAHwOQwIQQC5gCYHCbktwFptVqu3++7r68vt9ls3Gq1+rbE0WjkGo3G897xeHSz2ezbmMFg4Nrt9vPe6XRy0+m0cKtE13A4dNVq1e12O7dYLIJ16frL5XI0936/u+Vy6fb7fS79byXELujxePwA4sNQhRaKD0PH/A8o4/HY1Wq16JE+kFd0+TBU+ztQcgPp9Xqu2+26UqkU6fCBWLEKQAGp4Mvl8qxQBaBGxAHOVXIxk+KMtEBsoaXp8tcjj5JuIWmJ6wSv6M8FxFbP7XZzlUrlBxAdY6vFb28iUKDKpe0uq43IWDvmer26+XweGaAVn1ahtpBknLRaKSoLRMek6TocDs9isuYrpLwJzw2k2WxGvbJer0f936/oNCBSQWKAmJkGJK3KrLEy7nw+P/ehuP1Aq1PmdTodt91uo1ua8hAg8rz1ep0KxBbKK8nQMbmA2AcktRitFCvMb2Nqoq3ouHaRtKC4PSqkMi1UCySumHxdkmhtT3au38ZCN/ePBmJNEmihVfmngBTdsjQ1NiWhG2kSkKw95CNbVhwQf6Fxm7pta2l7gczNOull9e4QIL6upE1dDxYhrdPqLKxlFX3ste1KTnpyyWkvpG0lAfm4Y+8rm7qMKfLFUP9bT3f2xPRqdSYBkf/6uBdDhZL1IlfEpxP/yKufYuyzstqd3/J+xaeTrB7N38MdeHsPCX8kZ6Q5QCBg9UEgBALmAJgcJoRAwBwAk8OEEAiYA2BymBACAXMATA4TQiBgDoDJYUIIBMwBMDlMCIGAOQAmhwkhEDAHwOQwIQQC5gCYHCaEQMAcAJPDhBAImANgcpgQAgFzAEwOE0IgYA6AyWFCCATMATA5TAiBgDkAJocJIRAwB8DkMCEEAuYAmBwmhEDAHACTw4QQCJgDYHKYEAIBcwBMDhNCIGAOgMn5B4tOkk0/08/bAAAAAElFTkSuQmCC'
+    "
+    [alt]="
+      player.avatarUrl !== null
+        ? 'Photo of ' + player.firstName + ' ' + player.lastName
+        : 'Placeholder image from https://placeholderimage.dev/'
+    "
+  />
+  <div class="col m-3 mt-0">
+    <p>
+      Firts name: <b>{{ player.firstName }}</b>
+    </p>
+    <p>
+      Last name: <b>{{ player.lastName }}</b>
+    </p>
+  </div>
+</div>

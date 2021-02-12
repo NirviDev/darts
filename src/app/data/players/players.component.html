@@ -1,0 +1,6 @@
+<div class="row justify-content-between px-5">
+  <app-player-item class="col-5 m-4 player-card rounded"
+  *ngFor="let playerEl of players; let i = index"
+  [player]="playerEl"
+  [index]="i"></app-player-item>
+</div>

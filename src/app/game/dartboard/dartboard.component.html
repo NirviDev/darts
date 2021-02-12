@@ -1,0 +1,554 @@
+<div class="row h-100 justify-content-center align-items-center">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    xlink="http://www.w3.org/1999/xlink"
+    viewBox="-125 -125 250 250"
+    version="1.1"
+    id="dartboard"
+  >
+    <defs>
+      <path
+        id="inner"
+        d="M-3 -20 A20 20 0 0 1 3 -20 L8 -49 A50 50 0 0 0 -8 -49Z"
+      />
+      <path
+        id="tripple"
+        d="M-8 -49 A50 50 0 0 1 8 -49 L9 -59 A60 60 0 0 0 -9 -59Z"
+      />
+      <path
+        id="outer"
+        d="M-9 -59 A60 60 0 0 1 9 -59 L14 -89 A90 90 0 0 0 -14 -89Z"
+      />
+      <path
+        id="double"
+        d="M-14 -89 A90 90 0 0 1 14 -89 L16 -99 A100 100 0 0 0 -16 -99Z"
+      />
+    </defs>
+
+    <circle id="miss" (click)="onClick(0, 0)" r="125" class="black" />
+    <g stroke-width="1" stroke="#CFCFC4">
+      <circle id="s25" (click)="onClick(25, 1)" r="20" class="green" />
+      <circle id="d25" (click)="onClick(25, 2)" r="9" class="red" />
+      <g>
+        <use
+          id="s20"
+          (click)="onClick(20, 1)"
+          xlink:href="#inner"
+          class="black"
+        />
+        <use
+          id="t20"
+          (click)="onClick(20, 3)"
+          xlink:href="#tripple"
+          class="red"
+        />
+        <use
+          id="s20"
+          (click)="onClick(20, 1)"
+          xlink:href="#outer"
+          class="black"
+        />
+        <use
+          id="d20"
+          (click)="onClick(20, 2)"
+          xlink:href="#double"
+          class="red"
+        />
+        <text x="0" y="-110">20</text>
+      </g>
+      <g transform="rotate(18)">
+        <use
+          id="s1"
+          (click)="onClick(1, 1)"
+          xlink:href="#inner"
+          class="white"
+        />
+        <use
+          id="t1"
+          (click)="onClick(1, 3)"
+          xlink:href="#tripple"
+          class="green"
+        />
+        <use
+          id="s1"
+          (click)="onClick(1, 1)"
+          xlink:href="#outer"
+          class="white"
+        />
+        <use
+          id="d1"
+          (click)="onClick(1, 2)"
+          xlink:href="#double"
+          class="green"
+        />
+        <text x="0" y="-110">1</text>
+      </g>
+      <g transform="rotate(36)">
+        <use
+          id="s18"
+          (click)="onClick(18, 1)"
+          xlink:href="#inner"
+          class="black"
+        />
+        <use
+          id="t18"
+          (click)="onClick(18, 3)"
+          xlink:href="#tripple"
+          class="red"
+        />
+        <use
+          id="s18"
+          (click)="onClick(18, 1)"
+          xlink:href="#outer"
+          class="black"
+        />
+        <use
+          id="d18"
+          (click)="onClick(18, 2)"
+          xlink:href="#double"
+          class="red"
+        />
+        <text x="0" y="-110">18</text>
+      </g>
+      <g transform="rotate(54)">
+        <use
+          id="s4"
+          (click)="onClick(4, 1)"
+          xlink:href="#inner"
+          class="white"
+        />
+        <use
+          id="t4"
+          (click)="onClick(4, 3)"
+          xlink:href="#tripple"
+          class="green"
+        />
+        <use
+          id="s4"
+          (click)="onClick(4, 1)"
+          xlink:href="#outer"
+          class="white"
+        />
+        <use
+          id="d4"
+          (click)="onClick(4, 2)"
+          xlink:href="#double"
+          class="green"
+        />
+        <text x="0" y="-110">4</text>
+      </g>
+      <g transform="rotate(72)">
+        <use
+          id="s13"
+          (click)="onClick(13, 1)"
+          xlink:href="#inner"
+          class="black"
+        />
+        <use
+          id="t13"
+          (click)="onClick(13, 3)"
+          xlink:href="#tripple"
+          class="red"
+        />
+        <use
+          id="s13"
+          (click)="onClick(13, 1)"
+          xlink:href="#outer"
+          class="black"
+        />
+        <use
+          id="d13"
+          (click)="onClick(13, 2)"
+          xlink:href="#double"
+          class="red"
+        />
+        <text x="0" y="-110">13</text>
+      </g>
+      <g transform="rotate(90)">
+        <use
+          id="s6"
+          (click)="onClick(6, 1)"
+          xlink:href="#inner"
+          class="white"
+        />
+        <use
+          id="t6"
+          (click)="onClick(6, 3)"
+          xlink:href="#tripple"
+          class="green"
+        />
+        <use
+          id="s6"
+          (click)="onClick(6, 1)"
+          xlink:href="#outer"
+          class="white"
+        />
+        <use
+          id="d6"
+          (click)="onClick(6, 2)"
+          xlink:href="#double"
+          class="green"
+        />
+        <text x="0" y="-110">6</text>
+      </g>
+      <g transform="rotate(108)">
+        <use
+          id="s10"
+          (click)="onClick(10, 1)"
+          xlink:href="#inner"
+          class="black"
+        />
+        <use
+          id="t10"
+          (click)="onClick(10, 3)"
+          xlink:href="#tripple"
+          class="red"
+        />
+        <use
+          id="s10"
+          (click)="onClick(10, 1)"
+          xlink:href="#outer"
+          class="black"
+        />
+        <use
+          id="d10"
+          (click)="onClick(10, 2)"
+          xlink:href="#double"
+          class="red"
+        />
+        <text x="0" y="-110">10</text>
+      </g>
+      <g transform="rotate(126)">
+        <use
+          id="s15"
+          (click)="onClick(15, 1)"
+          xlink:href="#inner"
+          class="white"
+        />
+        <use
+          id="t15"
+          (click)="onClick(15, 3)"
+          xlink:href="#tripple"
+          class="green"
+        />
+        <use
+          id="s15"
+          (click)="onClick(15, 1)"
+          xlink:href="#outer"
+          class="white"
+        />
+        <use
+          id="d15"
+          (click)="onClick(15, 2)"
+          xlink:href="#double"
+          class="green"
+        />
+        <text x="0" y="-110">15</text>
+      </g>
+      <g transform="rotate(144)">
+        <use
+          id="s2"
+          (click)="onClick(2, 1)"
+          xlink:href="#inner"
+          class="black"
+        />
+        <use
+          id="t2"
+          (click)="onClick(2, 3)"
+          xlink:href="#tripple"
+          class="red"
+        />
+        <use
+          id="s2"
+          (click)="onClick(2, 1)"
+          xlink:href="#outer"
+          class="black"
+        />
+        <use id="d2" (click)="onClick(2, 2)" xlink:href="#double" class="red" />
+        <text x="0" y="-110">2</text>
+      </g>
+      <g transform="rotate(162)">
+        <use
+          id="s17"
+          (click)="onClick(17, 1)"
+          xlink:href="#inner"
+          class="white"
+        />
+        <use
+          id="t17"
+          (click)="onClick(17, 3)"
+          xlink:href="#tripple"
+          class="green"
+        />
+        <use
+          id="s17"
+          (click)="onClick(17, 1)"
+          xlink:href="#outer"
+          class="white"
+        />
+        <use
+          id="d17"
+          (click)="onClick(17, 2)"
+          xlink:href="#double"
+          class="green"
+        />
+        <text x="0" y="-110">17</text>
+      </g>
+      <g transform="rotate(180)">
+        <use
+          id="s3"
+          (click)="onClick(3, 1)"
+          xlink:href="#inner"
+          class="black"
+        />
+        <use
+          id="t3"
+          (click)="onClick(3, 3)"
+          xlink:href="#tripple"
+          class="red"
+        />
+        <use
+          id="s3"
+          (click)="onClick(3, 1)"
+          xlink:href="#outer"
+          class="black"
+        />
+        <use id="d3" (click)="onClick(3, 2)" xlink:href="#double" class="red" />
+        <text x="0" y="-110">3</text>
+      </g>
+      <g transform="rotate(-162)">
+        <use
+          id="s19"
+          (click)="onClick(19, 1)"
+          xlink:href="#inner"
+          class="white"
+        />
+        <use
+          id="t19"
+          (click)="onClick(19, 3)"
+          xlink:href="#tripple"
+          class="green"
+        />
+        <use
+          id="s19"
+          (click)="onClick(19, 1)"
+          xlink:href="#outer"
+          class="white"
+        />
+        <use
+          id="d19"
+          (click)="onClick(19, 2)"
+          xlink:href="#double"
+          class="green"
+        />
+        <text x="0" y="-110">19</text>
+      </g>
+      <g transform="rotate(-144)">
+        <use
+          id="s7"
+          (click)="onClick(7, 1)"
+          xlink:href="#inner"
+          class="black"
+        />
+        <use
+          id="t7"
+          (click)="onClick(7, 3)"
+          xlink:href="#tripple"
+          class="red"
+        />
+        <use
+          id="s7"
+          (click)="onClick(7, 1)"
+          xlink:href="#outer"
+          class="black"
+        />
+        <use id="d7" (click)="onClick(7, 2)" xlink:href="#double" class="red" />
+        <text x="0" y="-110">7</text>
+      </g>
+      <g transform="rotate(-126)">
+        <use
+          id="s16"
+          (click)="onClick(16, 1)"
+          xlink:href="#inner"
+          class="white"
+        />
+        <use
+          id="t16"
+          (click)="onClick(16, 3)"
+          xlink:href="#tripple"
+          class="green"
+        />
+        <use
+          id="s16"
+          (click)="onClick(16, 1)"
+          xlink:href="#outer"
+          class="white"
+        />
+        <use
+          id="d16"
+          (click)="onClick(16, 2)"
+          xlink:href="#double"
+          class="green"
+        />
+        <text x="0" y="-110">16</text>
+      </g>
+      <g transform="rotate(-108)">
+        <use
+          id="s8"
+          (click)="onClick(8, 1)"
+          xlink:href="#inner"
+          class="black"
+        />
+        <use
+          id="t8"
+          (click)="onClick(8, 3)"
+          xlink:href="#tripple"
+          class="red"
+        />
+        <use
+          id="s8"
+          (click)="onClick(8, 1)"
+          xlink:href="#outer"
+          class="black"
+        />
+        <use id="d8" (click)="onClick(8, 2)" xlink:href="#double" class="red" />
+        <text x="0" y="-110">8</text>
+      </g>
+      <g transform="rotate(-90)">
+        <use
+          id="s11"
+          (click)="onClick(11, 1)"
+          xlink:href="#inner"
+          class="white"
+        />
+        <use
+          id="t11"
+          (click)="onClick(11, 3)"
+          xlink:href="#tripple"
+          class="green"
+        />
+        <use
+          id="s11"
+          (click)="onClick(11, 1)"
+          xlink:href="#outer"
+          class="white"
+        />
+        <use
+          id="d11"
+          (click)="onClick(11, 2)"
+          xlink:href="#double"
+          class="green"
+        />
+        <text x="0" y="-110">11</text>
+      </g>
+      <g transform="rotate(-72)">
+        <use
+          id="s14"
+          (click)="onClick(14, 1)"
+          xlink:href="#inner"
+          class="black"
+        />
+        <use
+          id="t14"
+          (click)="onClick(14, 3)"
+          xlink:href="#tripple"
+          class="red"
+        />
+        <use
+          id="s14"
+          (click)="onClick(14, 1)"
+          xlink:href="#outer"
+          class="black"
+        />
+        <use
+          id="d14"
+          (click)="onClick(14, 2)"
+          xlink:href="#double"
+          class="red"
+        />
+        <text x="0" y="-110">14</text>
+      </g>
+      <g transform="rotate(-54)">
+        <use
+          id="s9"
+          (click)="onClick(9, 1)"
+          xlink:href="#inner"
+          class="white"
+        />
+        <use
+          id="t9"
+          (click)="onClick(9, 3)"
+          xlink:href="#tripple"
+          class="green"
+        />
+        <use
+          id="s9"
+          (click)="onClick(9, 1)"
+          xlink:href="#outer"
+          class="white"
+        />
+        <use
+          id="d9"
+          (click)="onClick(9, 2)"
+          xlink:href="#double"
+          class="green"
+        />
+        <text x="0" y="-110">9</text>
+      </g>
+      <g transform="rotate(-36)">
+        <use
+          id="s12"
+          (click)="onClick(12, 1)"
+          xlink:href="#inner"
+          class="black"
+        />
+        <use
+          id="t12"
+          (click)="onClick(12, 3)"
+          xlink:href="#tripple"
+          class="red"
+        />
+        <use
+          id="s12"
+          (click)="onClick(12, 1)"
+          xlink:href="#outer"
+          class="black"
+        />
+        <use
+          id="d12"
+          (click)="onClick(12, 2)"
+          xlink:href="#double"
+          class="red"
+        />
+        <text x="0" y="-110">12</text>
+      </g>
+      <g transform="rotate(-18)">
+        <use
+          id="s5"
+          (click)="onClick(5, 1)"
+          xlink:href="#inner"
+          class="white"
+        />
+        <use
+          id="t5"
+          (click)="onClick(5, 3)"
+          xlink:href="#tripple"
+          class="green"
+        />
+        <use
+          id="s5"
+          (click)="onClick(5, 1)"
+          xlink:href="#outer"
+          class="white"
+        />
+        <use
+          id="d5"
+          (click)="onClick(5, 2)"
+          xlink:href="#double"
+          class="green"
+        />
+        <text x="0" y="-110">5</text>
+      </g>
+    </g>
+  </svg>
+</div>
