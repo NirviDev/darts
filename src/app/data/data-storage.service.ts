@@ -49,7 +49,7 @@ export class DataStorageService {
       }),
       tap(legs => {
         this.dataService.setLegs(legs);
-      })
+      }),
     );
   }
 

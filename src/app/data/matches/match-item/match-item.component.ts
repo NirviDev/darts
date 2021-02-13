@@ -1,9 +1,10 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { DataService } from '../../data.service';
 import { DataStorageService } from '../../data-storage.service';
 import { Match } from '../../match.model';
+import { ScoreService } from 'src/app/game/score-panel/score.service';
 
 @Component({
   selector: 'app-match-item',
@@ -14,7 +15,7 @@ export class MatchItemComponent implements OnInit, OnDestroy {
   matches: Match[];
   subscription: Subscription;
 
-  constructor (private dataService: DataService, private dataStorageService: DataStorageService) {}
+  constructor (private dataService: DataService, private dataStorageService: DataStorageService, private scoreService: ScoreService) {}
 
   ngOnInit(): void {
     this.subscription = this.dataService.matchesChanged
@@ -26,8 +27,9 @@ export class MatchItemComponent implements OnInit, OnDestroy {
   this.matches = this.dataService.getMatches();
   }
 
-  onFetchLegs(matchId: string) {
+  onFetchLegs(matchId: string, player1Id: string, player2Id: string) {
     this.dataStorageService.fetchLegs(matchId).subscribe();
+    this.scoreService.setPlayersId( player1Id, player2Id);
   }
 
   ngOnDestroy() {
