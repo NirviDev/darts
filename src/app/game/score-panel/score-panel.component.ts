@@ -1,9 +1,4 @@
-import {
-  Component,
-  Input,
-  OnDestroy,
-  OnInit
-} from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { NgbPagination } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 
@@ -18,16 +13,15 @@ import { ScoreService } from './score.service';
   templateUrl: './score-panel.component.html',
   styleUrls: ['./score-panel.component.css'],
 })
-export class ScorePanelComponent implements OnInit, OnDestroy{
+export class ScorePanelComponent implements OnInit, OnDestroy {
   @Input() leg: Leg;
   @Input() index: number;
   matches: Match[];
   legs: Leg[];
-  player1Id = "";
-  player2Id = "";
+  player1Id = '';
+  player2Id = '';
   throw: Throw[];
   subscription: Subscription;
-
 
   legPage = 1;
   legPageSize = 1;
@@ -35,7 +29,10 @@ export class ScorePanelComponent implements OnInit, OnDestroy{
   roundPage = 1;
   roundPageSize = 1;
 
-  constructor(private dataService: DataService, private scoreService: ScoreService) {}
+  constructor(
+    private dataService: DataService,
+    private scoreService: ScoreService
+  ) {}
 
   ngOnInit(): void {
     this.subscription = this.dataService.legsChanged.subscribe(
@@ -57,7 +54,16 @@ export class ScorePanelComponent implements OnInit, OnDestroy{
         this.player2Id = player2Id;
       }
     );
-    this.player2Id = this.scoreService.getPlayer2Id()
+    this.player2Id = this.scoreService.getPlayer2Id();
+  }
+
+  scoreCalculator(allThrow, actualRound) {
+    let actualScore = 501;
+
+    for(let i = 0; i < actualRound; i++) {
+      actualScore -= allThrow[i].score;
+    }
+    return actualScore;
   }
 
   ngOnDestroy() {
