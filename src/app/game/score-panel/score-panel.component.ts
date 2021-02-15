@@ -1,5 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { NgbPagination } from '@ng-bootstrap/ng-bootstrap';
+import { Component, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { DataService } from 'src/app/data/data.service';
@@ -22,6 +21,8 @@ export class ScorePanelComponent implements OnInit, OnDestroy {
   player2Id = '';
   throw: Throw[];
   subscription: Subscription;
+
+  scorePanelActive = null;
 
   legPage = 1;
   legPageSize = 1;
@@ -55,6 +56,15 @@ export class ScorePanelComponent implements OnInit, OnDestroy {
       }
     );
     this.player2Id = this.scoreService.getPlayer2Id();
+
+    this.subscription = this.scoreService.scorePanelActiveChanged.subscribe(
+      (scorePanelActive: boolean) => {
+        this.scorePanelActive = scorePanelActive;
+      }
+    );
+    this.scorePanelActive = this.scoreService.getScorePanelActive();
+
+    console.log(this.scorePanelActive);
   }
 
   scoreCalculator(allThrow, actualRound) {

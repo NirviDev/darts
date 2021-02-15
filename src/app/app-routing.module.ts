@@ -13,7 +13,7 @@ const appRoutes: Routes = [
   { path: 'informations', component: InformationsComponent, children: [
     {path: 'matches', component: MatchesComponent},
     {path: 'players', component: PlayersComponent}
-  ]  },
+  ]},
 ];
 
 @NgModule({

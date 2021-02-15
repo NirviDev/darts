@@ -30,6 +30,7 @@ export class MatchItemComponent implements OnInit, OnDestroy {
   onFetchLegs(matchId: string, player1Id: string, player2Id: string) {
     this.dataStorageService.fetchLegs(matchId).subscribe();
     this.scoreService.setPlayersId( player1Id, player2Id);
+    this.scoreService.setScorePanelActive(true);
   }
 
   ngOnDestroy() {

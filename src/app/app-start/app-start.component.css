@@ -12,3 +12,103 @@
   height: 100vh;
   margin: 0;
 }
+
+/* Play button container start */
+#play-button-container {
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  width: 250px;
+  height: 60px;
+  border-radius: 50rem;
+  line-height: 60px;
+  font-size: 1.8rem;
+  font-weight: bold;
+  user-select: none;
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+#play-button-container:hover {
+  color: rgb(255, 0, 0);
+}
+
+#play-button-container:active {
+  transform: scale(0.98);
+}
+/* Play button container end */
+
+/* Play button text start */
+#play-button-text {
+  padding-left: 50%;
+  animation: creeping-text-out 1s;
+}
+
+#play-button-container:hover #play-button-text, #play-button-container.hover #play-button-text {
+  animation: creeping-text-in 1s;
+  animation-fill-mode: both;
+}
+
+@keyframes creeping-text-in {
+  to { padding-left: 25%; }
+}
+
+@keyframes creeping-text-out {
+  from { padding-left: 25%; }
+  to { padding-left: 50%; }
+}
+/* Play button text end */
+
+/* Play button circle start */
+#play-button-circle {
+  background-color: rgba(0, 0, 0, 0.12);
+  position: absolute;
+  z-index: 1;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  padding-top: 15px;
+  padding-left: 20px !important;
+  animation: rolling-play-button-circle-out 1s;
+}
+
+#play-button-container:hover #play-button-circle, #play-button-container.hover #play-button-circle {
+  animation: rolling-play-button-circle-in 1s;
+  animation-fill-mode: both;
+}
+
+@keyframes rolling-play-button-circle-in {
+  from {
+    margin-left: 0;
+    transform: rotate(0deg);
+  }
+  to {
+    margin-left: 190px;
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rolling-play-button-circle-out {
+  from {
+    margin-left: 190px;
+    transform: rotate(360deg);
+  }
+  to {
+    margin-left: 0;
+    transform: rotate(0deg);
+  }
+}
+/* Play button circle end*/
+
+/* Play button arrow start */
+#play-button-arrow {
+  width: 0;
+  height: 0;
+  border-top: 15px solid transparent;
+  border-left: 30px solid rgb(85, 85, 85);
+  border-bottom: 15px solid transparent;
+}
+
+#play-button-container:hover #play-button-arrow, #play-button-container.hover #play-button-arrow {
+  border-left: 30px solid rgb(255, 0, 0);
+}
+/* Play button arrow start */

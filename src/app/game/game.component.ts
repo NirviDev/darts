@@ -6,7 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./game.component.css']
 })
 export class GameComponent implements OnInit {
-
+  @Input() scorePanelActive: boolean;
   constructor () {}
 
   ngOnInit(): void {

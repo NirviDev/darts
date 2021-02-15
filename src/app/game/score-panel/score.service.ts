@@ -5,15 +5,17 @@ import { Subject } from "rxjs";
 export class ScoreService {
   player1IdChanged = new Subject<string>();
   player2IdChanged = new Subject<string>();
+  scorePanelActiveChanged = new Subject<boolean>();
 
+  private scorePanelActive: boolean;
   private player1: string;
   private player2: string;
 
   setPlayersId(player1Id: string, player2Id: string) {
     this.player1 = player1Id;
-    this.player1IdChanged.next(this.player1.slice())
+    this.player1IdChanged.next(this.player1.slice());
     this.player2 = player2Id;
-    this.player2IdChanged.next(this.player2.slice())
+    this.player2IdChanged.next(this.player2.slice());
     }
 
   getPlayer1Id() {
@@ -22,5 +24,14 @@ export class ScoreService {
 
   getPlayer2Id() {
     return this.player2;
+  }
+
+  setScorePanelActive(boolean: boolean){
+    this.scorePanelActive = boolean;
+    this.scorePanelActiveChanged.next(this.scorePanelActive);
+  }
+
+  getScorePanelActive() {
+    return this.scorePanelActive;
   }
 }
