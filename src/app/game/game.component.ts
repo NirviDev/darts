@@ -32,6 +32,5 @@ export class GameComponent implements OnInit {
       }
     );
     this.loadedMatch = this.gameService.getLoadedMatch();
-    console.log(this.loadedMatch);
   }
 }

@@ -1,6 +1,64 @@
 <div class="row h-100">
-  <div class="new-game-footer col-12 align-self-end px-4 py-3">
-    <button class="btn btn-info px-5 rounded-pill border-dark btn-shadow">Create match</button>
-    <button class="btn btn-info px-5 rounded-pill border-dark btn-shadow" [disabled]="!loadedMatch" (click)="onBackScorePanel(true)">Back</button>
+  <div class="col-12">
+    <form class="h-100">
+      <div class="row h-100">
+        <div class="col">
+          <label for="player">Player 1</label>
+          <select name="player1Id" (change)="selectPlayer1($event)">
+            <option selected disabled>Choose a player</option>
+            <option
+              *ngFor="let player1 of players"
+              [ngValue]="player1"
+              ngModel
+              required
+              [disabled]="player1.playerId === selectedPlayer2 ? true : false"
+            >
+              {{ player1.playerId }}
+            </option>
+          </select>
+        </div>
+        <div class="col">
+          <label for="player">Player 2</label>
+          <select name="player2Id" (change)="selectPlayer2($event)">
+            <option selected disabled>Choose a player</option>
+            <option
+              *ngFor="let player2 of players"
+              [ngValue]="player2"
+              ngModel
+              required
+              [disabled]="player2.playerId === selectedPlayer1 ? true : false"
+            >
+              {{ player2.playerId }}
+            </option>
+          </select>
+        </div>
+        <div class="col">
+          <label for="legsToWin">Legs to win</label>
+          <input
+            name="legsToWin"
+            type="number"
+            id="legsToWin"
+            class="form-control"
+            ngModel
+            required
+            pattern="^[1-9]+[0-9]*$"
+            min="3"
+            value="3"
+          >
+        </div>
+        <div class="new-game-footer col-12 align-self-end px-4 py-3">
+          <button class="btn btn-info px-5 rounded-pill border-dark btn-shadow">
+            Create match
+          </button>
+          <button
+            class="btn btn-info px-5 rounded-pill border-dark btn-shadow"
+            [disabled]="!loadedMatch"
+            (click)="onBackToScorePanel(true)"
+          >
+            Back
+          </button>
+        </div>
+      </div>
+    </form>
   </div>
 </div>

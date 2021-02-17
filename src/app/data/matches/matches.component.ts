@@ -26,7 +26,6 @@ export class MatchesComponent implements OnInit, OnDestroy {
       }
     );
   this.matches = this.dataService.getMatches();
-  console.log(this.dataService.matchesChanged)
   }
 
   onFetchLegs(matchId: string, player1Id: string, player2Id: string) {

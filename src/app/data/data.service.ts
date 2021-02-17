@@ -39,9 +39,9 @@ export class DataService {
 
   setPlayersId(player1Id: string, player2Id: string) {
     this.player1 = player1Id;
-    this.player1IdChanged.next(this.player1.slice());
+    this.player1IdChanged.next(this.player1);
     this.player2 = player2Id;
-    this.player2IdChanged.next(this.player2.slice());
+    this.player2IdChanged.next(this.player2);
     }
 
     getPlayer1Id() {
