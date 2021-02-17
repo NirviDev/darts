@@ -1,7 +1,8 @@
 <div class="container-fluid game-page">
   <div class="row">
     <div class="col game-panel" id="score-panel">
-      <app-score-panel></app-score-panel>
+      <app-new-game-panel *ngIf="!scorePanelActive"></app-new-game-panel>
+      <app-score-panel *ngIf="scorePanelActive"></app-score-panel>
     </div>
     <div class="col game-panel" id="dartboard-panel">
       <app-dartboard></app-dartboard>

@@ -16,9 +16,9 @@ import { PlayersComponent } from './data/players/players.component';
 import { InformationsComponent } from './informations/informations.component';
 import { PlayerItemComponent } from './data/players/player-item/player-item.component';
 import { DataService } from './data/data.service';
-import { MatchItemComponent } from './data/matches/match-item/match-item.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppStartComponent } from './app-start/app-start.component';
+import { NewGamePanelComponent } from './game/new-game-panel/new-game-panel.component';
 
 @NgModule({
   imports: [
@@ -40,8 +40,8 @@ import { AppStartComponent } from './app-start/app-start.component';
     PlayersComponent,
     InformationsComponent,
     PlayerItemComponent,
-    MatchItemComponent,
-    AppStartComponent
+    AppStartComponent,
+    NewGamePanelComponent
   ],
 
   providers: [

@@ -31,8 +31,4 @@
 
 .score-panel-footer {
   background-color: rgb(36, 209, 163);
-  position: fixed;
-  width: 50% !important;
-  bottom: 0;
-  left: 0;
 }

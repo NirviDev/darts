@@ -10,8 +10,8 @@ import { Player } from './players/player.model';
 
 @Injectable({ providedIn: 'root' })
 export class DataStorageService {
-  proxy = "http://127.0.0.1:8080/"
-  baseUrl = 'https://insimu-darts-api.azurewebsites.net/darts_api/'
+  proxy = "http://127.0.0.1:8080/";
+  baseUrl = 'https://insimu-darts-api.azurewebsites.net/darts_api/';
 
   constructor(
     private http: HttpClient,

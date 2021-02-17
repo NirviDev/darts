@@ -1,4 +1,4 @@
-<div class="row" *ngIf="scorePanelActive">
+<div class="row">
   <div class="col-12">
     <h6 class="text-center">Number of leg</h6>
   </div>
@@ -182,16 +182,17 @@
                 </ngb-pagination>
               </div>
             </div>
-            <div class="col-12 mb-4">
+            <div class="col-12">
               <h6 class="text-center">Number of round</h6>
             </div>
           </ng-template>
         </li>
       </ul>
       <div [ngbNavOutlet]="nav"></div>
-      <div class="score-panel-footer col-12 px-4 py-3">
-        <button class="btn btn-info px-5 rounded-pill border-dark btn-shadow">Add throw</button>
-      </div>
     </div>
+  </div>
+  <div class="score-panel-footer col-12 align-self-end px-4 py-3">
+    <button class="btn btn-info px-5 rounded-pill border-dark btn-shadow" (click)="onNewGame(false)">New game</button>
+    <button class="btn btn-info px-5 rounded-pill border-dark btn-shadow">Add throw</button>
   </div>
 </div>

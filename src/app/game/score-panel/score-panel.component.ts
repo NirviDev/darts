@@ -5,7 +5,7 @@ import { DataService } from 'src/app/data/data.service';
 import { Match } from 'src/app/data/match.model';
 import { Leg } from 'src/app/data/leg.model';
 import { Throw } from 'src/app/data/throw.model';
-import { ScoreService } from './score.service';
+import { GameService } from '../game.service';
 
 @Component({
   selector: 'app-score-panel',
@@ -22,8 +22,6 @@ export class ScorePanelComponent implements OnInit, OnDestroy {
   throw: Throw[];
   subscription: Subscription;
 
-  scorePanelActive = null;
-
   legPage = 1;
   legPageSize = 1;
 
@@ -32,10 +30,21 @@ export class ScorePanelComponent implements OnInit, OnDestroy {
 
   constructor(
     private dataService: DataService,
-    private scoreService: ScoreService
+    private gameService: GameService
   ) {}
 
   ngOnInit(): void {
+    this.loadMatchDetails();
+
+    /* this.subscription = this.dataService.scorePanelActiveChanged.subscribe(
+      (scorePanelActive: boolean) => {
+        this.scorePanelActive = scorePanelActive;
+      }
+    );
+    this.scorePanelActive = this.dataService.getScorePanelActive(); */
+  }
+
+  loadMatchDetails() {
     this.subscription = this.dataService.legsChanged.subscribe(
       (legs: Leg[]) => {
         this.legs = legs;
@@ -43,28 +52,19 @@ export class ScorePanelComponent implements OnInit, OnDestroy {
     );
     this.legs = this.dataService.getLegs();
 
-    this.subscription = this.scoreService.player1IdChanged.subscribe(
+    this.subscription = this.dataService.player1IdChanged.subscribe(
       (player1Id: string) => {
         this.player1Id = player1Id;
       }
     );
-    this.player1Id = this.scoreService.getPlayer1Id();
+    this.player1Id = this.dataService.getPlayer1Id();
 
-    this.subscription = this.scoreService.player2IdChanged.subscribe(
+    this.subscription = this.dataService.player2IdChanged.subscribe(
       (player2Id: string) => {
         this.player2Id = player2Id;
       }
     );
-    this.player2Id = this.scoreService.getPlayer2Id();
-
-    this.subscription = this.scoreService.scorePanelActiveChanged.subscribe(
-      (scorePanelActive: boolean) => {
-        this.scorePanelActive = scorePanelActive;
-      }
-    );
-    this.scorePanelActive = this.scoreService.getScorePanelActive();
-
-    console.log(this.scorePanelActive);
+    this.player2Id = this.dataService.getPlayer2Id();
   }
 
   scoreCalculator(allThrow, actualRound) {
@@ -74,6 +74,10 @@ export class ScorePanelComponent implements OnInit, OnDestroy {
       actualScore -= allThrow[i].score;
     }
     return actualScore;
+  }
+
+  onNewGame(boolean: boolean) {
+    this.gameService.setScorePanelActive(boolean);
   }
 
   ngOnDestroy() {

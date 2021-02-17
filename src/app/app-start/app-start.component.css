@@ -35,6 +35,10 @@
 #play-button-container:active {
   transform: scale(0.98);
 }
+
+#play-button-container:focus {
+  outline: none;
+}
 /* Play button container end */
 
 /* Play button text start */
