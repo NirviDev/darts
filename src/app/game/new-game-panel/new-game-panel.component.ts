@@ -1,11 +1,12 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { FormGroupDirective, NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
-import { GameService } from '../game.service';
-import { Player } from 'src/app/data/players/player.model';
 import { DataService } from 'src/app/data/data.service';
 import { DataStorageService } from 'src/app/data/data-storage.service';
+import { GameService } from '../game.service';
+import { GameStorageService } from '../game-storage.service';
+import { Player } from 'src/app/data/players/player.model';
 
 @Component({
   selector: 'app-new-game-panel',
@@ -13,18 +14,22 @@ import { DataStorageService } from 'src/app/data/data-storage.service';
   styleUrls: ['./new-game-panel.component.css'],
 })
 export class NewGamePanelComponent implements OnInit, OnDestroy {
+  @ViewChild('f', { static: true }) newGameForm: NgForm;
   players: Player[];
   subscription: Subscription;
 
   loadedMatch = null;
 
-  selectedPlayer1 = "";
-  selectedPlayer2 = "";
+  defaultLegsToWin = 3;
+  player1:string;
+  player2:string;
+  legsToWin:number = null;
 
   constructor(
     private dataService: DataService,
     private dataStorageService: DataStorageService,
-    private gameService: GameService
+    private gameService: GameService,
+    private gameStorageService: GameStorageService
   ) {}
 
   ngOnInit(): void {
@@ -36,25 +41,24 @@ export class NewGamePanelComponent implements OnInit, OnDestroy {
       }
     );
     this.players = this.dataService.getPlayers();
+  }
 
-    this.subscription = this.gameService.loadedMatchChanged.subscribe(
-      (loadedMatch: boolean) => {
-        this.loadedMatch = loadedMatch;
-      }
-    );
-    this.loadedMatch = this.gameService.getLoadedMatch();
+  onSubmit() {
+    this.player1 = this.newGameForm.value.player1Id;
+    this.player2 = this.newGameForm.value.player2Id;
+    this.legsToWin = this.newGameForm.value.legsToWin;
+
+    this.gameService.setNewPlayersId(this.player1, this.player2);
+
+    this.gameStorageService.createMatch(this.player1, this.player2, this.legsToWin);
+    this.gameService.setActualGame(true);
+    this.gameService.setChangeActualAndLoaded(false);
+    this.gameService.setScorePanelActive(true);
+    this.newGameForm.reset();
   }
 
   onBackToScorePanel(boolean: boolean) {
     this.gameService.setScorePanelActive(boolean);
-  }
-
-  selectPlayer1(event) {
-    this.selectedPlayer1 = event.target.value;
-  }
-
-  selectPlayer2(event) {
-    this.selectedPlayer2 = event.target.value;
   }
 
   ngOnDestroy() {

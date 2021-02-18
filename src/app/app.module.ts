@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { FormsModule }   from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
@@ -23,6 +24,7 @@ import { NewGamePanelComponent } from './game/new-game-panel/new-game-panel.comp
 @NgModule({
   imports: [
     BrowserModule,
+    FormsModule,
     HttpClientModule,
     CommonModule,
     AppRoutingModule,

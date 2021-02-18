@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Subject } from "rxjs";
 
+import { GameService } from '../game/game.service';
 import { Match } from "./match.model";
 import { Leg } from "./leg.model";
 import { Player } from "./players/player.model";

@@ -23,6 +23,7 @@ export class PlayersComponent implements OnInit, OnDestroy {
       }
     );
   this.players = this.dataService.getPlayers();
+  console.log(this.players);
   }
 
   ngOnDestroy() {

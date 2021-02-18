@@ -1,32 +1,30 @@
 <div class="row h-100">
   <div class="col-12">
-    <form class="h-100">
+    <form class="h-100" (ngSubmit)="onSubmit()" #f="ngForm">
       <div class="row h-100">
         <div class="col">
-          <label for="player">Player 1</label>
-          <select name="player1Id" (change)="selectPlayer1($event)">
-            <option selected disabled>Choose a player</option>
+          <label for="player1Id">Player 1</label>
+          <select name="player1Id" ngModel required>
+            <option class="choose-a-player-title" value="" disabled>Choose a player</option>
             <option
+              class="choose-a-player-item"
               *ngFor="let player1 of players"
-              [ngValue]="player1"
-              ngModel
-              required
-              [disabled]="player1.playerId === selectedPlayer2 ? true : false"
+              [value]="player1.playerId"
+              [disabled]="player1.playerId === newGameForm.value.player2Id ? true : false"
             >
               {{ player1.playerId }}
             </option>
           </select>
         </div>
         <div class="col">
-          <label for="player">Player 2</label>
-          <select name="player2Id" (change)="selectPlayer2($event)">
-            <option selected disabled>Choose a player</option>
+          <label for="player2Id">Player 2</label>
+          <select name="player2Id" ngModel required>
+            <option class="choose-a-player-title" value="" disabled>Choose a player</option>
             <option
+              class="choose-a-player-item"
               *ngFor="let player2 of players"
-              [ngValue]="player2"
-              ngModel
-              required
-              [disabled]="player2.playerId === selectedPlayer1 ? true : false"
+              [value]="player2.playerId"
+              [disabled]="player2.playerId === newGameForm.value.player1Id ? true : false"
             >
               {{ player2.playerId }}
             </option>
@@ -38,16 +36,17 @@
             name="legsToWin"
             type="number"
             id="legsToWin"
-            class="form-control"
-            ngModel
+            [ngModel]="defaultLegsToWin"
             required
-            pattern="^[1-9]+[0-9]*$"
             min="3"
             value="3"
-          >
+            #legsToWin="ngModel">
+          <span *ngIf="legsToWin.value < 3 ? true: false" class="help-block">Minimum value: 3!</span>
         </div>
         <div class="new-game-footer col-12 align-self-end px-4 py-3">
-          <button class="btn btn-info px-5 rounded-pill border-dark btn-shadow">
+          <button class="btn btn-info px-5 rounded-pill border-dark btn-shadow"
+          type="submit"
+          [disabled]="!f.valid || legsToWin.value < 3">
             Create match
           </button>
           <button

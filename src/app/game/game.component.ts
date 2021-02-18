@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { GameService } from './game.service'
@@ -8,7 +8,7 @@ import { GameService } from './game.service'
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.css']
 })
-export class GameComponent implements OnInit {
+export class GameComponent implements OnInit, OnDestroy {
   subscription: Subscription;
 
   scorePanelActive = null;
@@ -26,11 +26,15 @@ export class GameComponent implements OnInit {
     );
     this.scorePanelActive = this.gameService.getScorePanelActive();
 
-    this.subscription = this.gameService.loadedMatchChanged.subscribe(
+   /*  this.subscription = this.gameService.loadedMatchChanged.subscribe(
       (loadedMatch: boolean) => {
         this.loadedMatch = loadedMatch;
       }
     );
-    this.loadedMatch = this.gameService.getLoadedMatch();
+    this.loadedMatch = this.gameService.getLoadedMatch(); */
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

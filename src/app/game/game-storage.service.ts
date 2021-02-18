@@ -1,23 +1,36 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders  } from '@angular/common/http';
-import { map, tap } from 'rxjs/operators';
+import { HttpClient, HttpHeaders} from '@angular/common/http';
 
 import { environment } from '../../environments/environment';
-import { DataService } from '../data/data.service';
 import { Match } from '../data/match.model';
-import { Leg } from '../data/leg.model';
-import { Player } from '../data/players/player.model';
+import { GameService } from './game.service';
 
 @Injectable({ providedIn: 'root' })
-export class GameStorage {
-  baseUrl = 'https://insimu-darts-api.azurewebsites.net/darts_api/';
+export class GameStorageService {
+  proxy: string = "http://127.0.0.1:8080/";
+  baseUrl: string = 'https://insimu-darts-api.azurewebsites.net/darts_api/';
 
   constructor(
     private http: HttpClient,
-    private dataService: DataService
+    private gameService: GameService
     ) { }
 
-  createMatch() {
+  createMatch(player1Id: string, player2Id: string, legsToWin: number) {
+    const httpHeaders = new HttpHeaders()
+    .append("authToken", environment.authToken)
 
+    const data = {
+      "player1Id": player1Id,
+      "player2Id": player2Id,
+      "legsToWin": legsToWin
+    }
+
+    this.http
+    .post<Match[]>(
+      this.proxy + this.baseUrl + "createMatch?player1Id=" + player1Id + "&player2Id=" + player2Id + "&legsToWin=" + legsToWin,
+      data, {headers: httpHeaders}
+    ).subscribe(match => {
+      this.gameService.setNewMatch(match);
+    });
   }
 }

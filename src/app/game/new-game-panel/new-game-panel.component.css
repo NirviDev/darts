@@ -1,3 +1,16 @@
+select.ng-invalid.ng-touched, input.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+
+.choose-a-player-title {
+  background-color: rgb(175, 175, 175);
+  color: white;
+}
+
+option.choose-a-player-item:disabled {
+  background-color: rgb(255, 180, 180);
+}
+
 .new-game-footer {
   background-color: rgb(36, 209, 163);
 }
