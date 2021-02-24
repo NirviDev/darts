@@ -1,11 +1,23 @@
-import { Component, Directive, Injectable, Input, NgModule, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
-import { Subscription } from 'rxjs';
+import {
+  Component,
+  Directive,
+  Injectable,
+  Input,
+  NgModule,
+  OnDestroy,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
+import { from, Observable, of, pipe, Subscription } from 'rxjs';
 
 import { DataService } from 'src/app/data/data.service';
 import { Match } from 'src/app/data/match.model';
 import { Leg } from 'src/app/data/leg.model';
 import { Throw } from 'src/app/data/throw.model';
 import { GameService } from '../game.service';
+import { getValueInRange } from '@ng-bootstrap/ng-bootstrap/util/util';
+import { filter, first, last, take } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 @Component({
@@ -14,16 +26,21 @@ import { GameService } from '../game.service';
   styleUrls: ['./score-panel.component.css'],
 })
 export class ScorePanelComponent implements OnInit, OnDestroy {
-  match: Match[];
-  legs: Leg[];
-  player1Id = '';
-  player2Id = '';
-  throw: Throw[];
   subscription: Subscription;
-
   loadedMatch = null;
   actualGame = null;
   changeActualAndLoaded = null;
+
+  matches: Match[];
+
+  matchId = '';
+  match: Match;
+  legs: Leg[];
+  lastLeg: Leg;
+  throw: Throw[];
+
+  player1TheNext: boolean = null;
+  player2TheNext: boolean = null;
 
   legPage = 1;
   legPageSize = 1;
@@ -49,7 +66,7 @@ export class ScorePanelComponent implements OnInit, OnDestroy {
         this.actualGame = actualGame;
       }
     );
-    this.actualGame= this.gameService.getActualGame();
+    this.actualGame = this.gameService.getActualGame();
 
     this.subscription = this.gameService.changeActualAndLoadedChanged.subscribe(
       (changeActualAndLoaded: boolean) => {
@@ -58,52 +75,105 @@ export class ScorePanelComponent implements OnInit, OnDestroy {
     );
     this.changeActualAndLoaded = this.gameService.getChangeActualAndLoaded();
 
-    if(this.changeActualAndLoaded) {
+    if (this.changeActualAndLoaded) {
       this.loadMatchDetails();
     }
 
-    if(!this.changeActualAndLoaded) {
+    if (!this.changeActualAndLoaded) {
       this.loadActualGame();
     }
   }
 
-  loadMatchDetails() {
-    this.subscription = this.dataService.matchesChanged.subscribe(
-      (match: Match[]) => {
-        this.match = match;
+  async loadMatchDetails() {
+    this.subscription = this.dataService.matchIdChanged.subscribe(
+      (matchId: string) => {
+        this.matchId = matchId;
       }
     );
-    this.match = this.dataService.getMatches();
+    this.matchId = this.dataService.getMatchId();
+
+    this.subscription = this.dataService.matchesChanged.subscribe(
+      (matches: Match[]) => {
+        this.matches = matches;
+      }
+    );
+    this.matches = this.dataService.getMatches();
+
+    this.matches.map((match: Match) => {
+      if (match.matchId === this.matchId) {
+        this.match = match;
+      }
+    });
+    console.log('ScoreMatch: ', this.match);
 
     this.subscription = this.dataService.legsChanged.subscribe(
       (legs: Leg[]) => {
         this.legs = legs;
+        this.lastLeg = this.legs[this.legs.length - 1];
       }
     );
     this.legs = this.dataService.getLegs();
 
-    this.subscription = this.dataService.player1IdChanged.subscribe(
-      (player1Id: string) => {
-        this.player1Id = player1Id;
-      }
-    );
-    this.player1Id = this.dataService.getPlayer1Id();
+    setTimeout(() => {
+      if (
+        this.match.legsToWin !== this.match.player1Score &&
+        this.match.legsToWin !== this.match.player2Score
+      ) {
+        let player1Throws = this.lastLeg.player1Throws;
+        let player1Score = 0;
+        let player2Throws = this.lastLeg.player2Throws;
+        let player2Score = 0;
 
-    this.subscription = this.dataService.player2IdChanged.subscribe(
-      (player2Id: string) => {
-        this.player2Id = player2Id;
+        if (player1Throws.length > 0) {
+          player1Throws.map((player1Throw) => {
+            player1Score += player1Throw.score;
+          });
+          console.log('Player1 score calculated');
+        }
+        console.log('Player1 score: ', player1Score);
+
+        if (player2Throws.length > 0) {
+          player2Throws.map((player2Throw) => {
+            player2Score += player2Throw.score;
+          });
+          console.log('Player2 score calculated');
+        }
+        console.log('Player2 score: ', player2Score);
+
+        if (
+          player1Throws.length < 1 ||
+          (player1Throws.length ==
+            player2Throws.length &&
+            player2Score != 501)
+        ) {
+          this.player1TheNext = true;
+          this.player2TheNext = false;
+          console.log('Player1 the next player');
+          console.log('Player1', this.player1TheNext);
+          console.log('Player2', this.player2TheNext);
+        } else if (
+          player2Throws.length <
+            player1Throws.length &&
+          player1Score != 501
+        ) {
+          this.player2TheNext = true;
+          this.player1TheNext = false;
+          console.log('Player2 the next player');
+          console.log('Player1', this.player1TheNext);
+          console.log('Player2', this.player2TheNext);
+        }
+        console.log('Closed match visit: false');
       }
-    );
-    this.player2Id = this.dataService.getPlayer2Id();
+    }, 500);
   }
 
   loadActualGame() {
     this.subscription = this.gameService.newMatchChanged.subscribe(
-      (match: Match[]) => {
-        this.match = match;
+      (matches: Match[]) => {
+        this.matches = matches;
       }
     );
-    this.match = this.gameService.getNewMatch();
+    this.matches = this.gameService.getNewMatch();
 
     this.subscription = this.gameService.newLegChanged.subscribe(
       (legs: Leg[]) => {
@@ -111,26 +181,12 @@ export class ScorePanelComponent implements OnInit, OnDestroy {
       }
     );
     this.legs = this.gameService.getNewLeg();
-
-    this.subscription = this.gameService.newGamePlayer1IdChanged.subscribe(
-      (player1Id: string) => {
-        this.player1Id = player1Id;
-      }
-    );
-    this.player1Id = this.gameService.getNewPlayer1Id();
-
-    this.subscription = this.gameService.newGamePlayer2IdChanged.subscribe(
-      (player2Id: string) => {
-        this.player2Id = player2Id;
-      }
-    );
-    this.player2Id = this.gameService.getNewPlayer2Id();
   }
 
   scoreCalculator(allThrow, actualRound: number) {
     let actualScore = 501;
 
-    for(let i = 0; i < actualRound; i++) {
+    for (let i = 0; i < actualRound; i++) {
       actualScore -= allThrow[i].score;
     }
     return actualScore;

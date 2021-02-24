@@ -26,17 +26,31 @@
       <div class="row">
         <div class="col text-center">
           <h4>{{ match.player1.firstName }} {{ match.player1.lastName }}</h4>
-          <img class="img-fluid m-3 border" [src]="match.player1.avatarUrl" alt="" />
+          <img class="img-responsive mt-3 border border-dark"
+          style="background-color: rgb(205, 205, 205);"
+          width="100"
+          height="100" [src]="match.player1.avatarUrl !== null
+          ? match.player1.avatarUrl
+          : '../../../../assets/placeholder-photo.png'" [alt]="match.player1.avatarUrl !== null
+          ? 'Photo of ' + match.player1.firstName + ' ' + match.player1.lastName
+          : 'Placeholder photo'" />
         </div>
-        <div class="col-4 pt-3 text-center">
+        <div class="col-4 pt-3 text-center border-right border-left">
           <h5>Legs to win: {{ match.legsToWin }}</h5>
           <h5>{{ match.player1.firstName }} {{ match.player1.lastName }} score: {{ match.player1Score }}</h5>
           <h5>{{ match.player2.firstName }} {{ match.player2.lastName }} score: {{ match.player2Score }}</h5>
-          <button routerLink="/game" class="btn btn-info m-3 px-5 rounded-pill border-dark btn-shadow" (click)="onFetchLegs(match.matchId, match.player1.playerId, match.player2.playerId)">Legs</button>
+          <button routerLink="/game" class="btn btn-info m-3 px-5 rounded-pill border-dark btn-shadow" (click)="onFetchLegs(match.matchId)">Legs</button>
         </div>
         <div class="col text-center">
           <h4>{{ match.player2.firstName }} {{ match.player2.lastName }}</h4>
-          <img class="img-fluid m-3 border" [src]="match.player2.avatarUrl" alt="" />
+          <img class="img-responsive mt-3 border border-dark"
+          style="background-color: rgb(205, 205, 205);"
+          width="100"
+          height="100" [src]="match.player2.avatarUrl !== null
+          ? match.player2.avatarUrl
+          : '../../../../assets/placeholder-photo.png'" [alt]="match.player2.avatarUrl !== null
+          ? 'Photo of ' + match.player2.firstName + ' ' + match.player2.lastName
+          : 'Placeholder photo'" />
         </div>
       </div>
     </ng-template>

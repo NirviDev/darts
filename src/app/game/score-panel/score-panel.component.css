@@ -32,3 +32,17 @@
 .score-panel-footer {
   background-color: rgb(36, 209, 163);
 }
+
+#closed-match {
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.9);
+  color: rgb(255, 255, 255);
+  position: absolute;
+  z-index: 9;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 100%;
+  justify-content: center;
+  align-items: center;
+}
