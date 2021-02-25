@@ -48,8 +48,6 @@ export class NewGamePanelComponent implements OnInit, OnDestroy {
     this.player2 = this.newGameForm.value.player2Id;
     this.legsToWin = this.newGameForm.value.legsToWin;
 
-    this.gameService.setNewPlayersId(this.player1, this.player2);
-
     this.gameStorageService.createMatch(this.player1, this.player2, this.legsToWin);
     this.gameService.setActualGame(true);
     this.gameService.setChangeActualAndLoaded(false);

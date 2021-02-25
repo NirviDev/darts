@@ -93,6 +93,7 @@
                       <img *ngIf="round.darts[0] && round.darts[1] && !round.darts[2] ? true : false" src="../../../assets/dart-miss.png" class="img-responsive" alt="Photo of actual dart">
                     </div>
                   </div>
+                  <button *ngIf="match.legsToWin === match.player1Score || match.legsToWin === match.player2Score ? false : true" [disabled]="round.darts.length === 3 && player1TheNext ? false: true" class="btn btn-info px-5 rounded-pill border-dark btn-shadow">Add throw</button>
                 </div>
               </div>
             </div>
@@ -203,7 +204,7 @@
   </div>
   <div class="score-panel-footer col-12 align-self-end px-4 py-3">
     <button class="btn btn-info px-5 rounded-pill border-dark btn-shadow" (click)="onNewGame(false)">New game</button>
-    <button *ngIf="match.legsToWin === match.player1Score || match.legsToWin === match.player2Score ? false : true" class="btn btn-info px-5 rounded-pill border-dark btn-shadow">Add throw</button>
+    <button *ngIf="match.legsToWin === match.player1Score || match.legsToWin === match.player2Score || actualGame ? false : true" class="btn btn-info px-5 rounded-pill border-dark btn-shadow" (click)="onContinueGame()">Continue game</button>
   </div>
 </div>
 <span *ngIf="match.legsToWin === match.player1Score || match.legsToWin === match.player2Score ? true : false" id="closed-match" class="help-block"><h1>This game is over!</h1></span>

@@ -26,11 +26,11 @@ export class GameStorageService {
     }
 
     this.http
-    .post<Match[]>(
+    .post<Match>(
       this.proxy + this.baseUrl + "createMatch?player1Id=" + player1Id + "&player2Id=" + player2Id + "&legsToWin=" + legsToWin,
       data, {headers: httpHeaders}
     ).subscribe(match => {
-      this.gameService.setNewMatch(match);
+      this.gameService.setMatch(match);
     });
   }
 }

@@ -1,23 +1,16 @@
 import {
   Component,
-  Directive,
   Injectable,
-  Input,
-  NgModule,
   OnDestroy,
-  OnInit,
-  Output,
-  ViewChild,
+  OnInit
 } from '@angular/core';
-import { from, Observable, of, pipe, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 import { DataService } from 'src/app/data/data.service';
+import { GameService } from '../game.service';
 import { Match } from 'src/app/data/match.model';
 import { Leg } from 'src/app/data/leg.model';
 import { Throw } from 'src/app/data/throw.model';
-import { GameService } from '../game.service';
-import { getValueInRange } from '@ng-bootstrap/ng-bootstrap/util/util';
-import { filter, first, last, take } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 @Component({
@@ -36,7 +29,6 @@ export class ScorePanelComponent implements OnInit, OnDestroy {
   matchId = '';
   match: Match;
   legs: Leg[];
-  lastLeg: Leg;
   throw: Throw[];
 
   player1TheNext: boolean = null;
@@ -84,7 +76,7 @@ export class ScorePanelComponent implements OnInit, OnDestroy {
     }
   }
 
-  async loadMatchDetails() {
+  loadMatchDetails() {
     this.subscription = this.dataService.matchIdChanged.subscribe(
       (matchId: string) => {
         this.matchId = matchId;
@@ -109,7 +101,6 @@ export class ScorePanelComponent implements OnInit, OnDestroy {
     this.subscription = this.dataService.legsChanged.subscribe(
       (legs: Leg[]) => {
         this.legs = legs;
-        this.lastLeg = this.legs[this.legs.length - 1];
       }
     );
     this.legs = this.dataService.getLegs();
@@ -119,9 +110,9 @@ export class ScorePanelComponent implements OnInit, OnDestroy {
         this.match.legsToWin !== this.match.player1Score &&
         this.match.legsToWin !== this.match.player2Score
       ) {
-        let player1Throws = this.lastLeg.player1Throws;
+        let player1Throws = this.legs[this.legs.length - 1].player1Throws;
         let player1Score = 0;
-        let player2Throws = this.lastLeg.player2Throws;
+        let player2Throws = this.legs[this.legs.length - 1].player2Throws;
         let player2Score = 0;
 
         if (player1Throws.length > 0) {
@@ -168,19 +159,19 @@ export class ScorePanelComponent implements OnInit, OnDestroy {
   }
 
   loadActualGame() {
-    this.subscription = this.gameService.newMatchChanged.subscribe(
-      (matches: Match[]) => {
-        this.matches = matches;
+    this.subscription = this.gameService.matchChanged.subscribe(
+      (match: Match) => {
+        this.match = match;
       }
     );
-    this.matches = this.gameService.getNewMatch();
+    this.match = this.gameService.getMatch();
 
-    this.subscription = this.gameService.newLegChanged.subscribe(
+    this.subscription = this.gameService.legsChanged.subscribe(
       (legs: Leg[]) => {
         this.legs = legs;
       }
     );
-    this.legs = this.gameService.getNewLeg();
+    this.legs = this.gameService.getLegs();
   }
 
   scoreCalculator(allThrow, actualRound: number) {
@@ -198,6 +189,17 @@ export class ScorePanelComponent implements OnInit, OnDestroy {
 
   onNewGame(boolean: boolean) {
     this.gameService.setScorePanelActive(boolean);
+  }
+
+  onContinueGame() {
+    this.gameService.setLoadedMatch(false);
+    this.gameService.setActualGame(true);
+    this.gameService.setChangeActualAndLoaded(false);
+
+    this.gameService.setMatch(this.match);
+    this.gameService.setLegs(this.legs);
+
+    this.loadActualGame();
   }
 
   ngOnDestroy() {
