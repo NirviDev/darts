@@ -29,10 +29,10 @@
       <ul
         ngbNav
         #nav="ngbNav"
-        [activeId]="player1TheNext || player2TheNext"
+        [activeId]="1"
         class="nav-tabs col-12 px-4 justify-content-start"
       >
-        <li [ngbNavItem]="player1TheNext">
+        <li [ngbNavItem]="1">
           <a ngbNavLink
             ><h4>{{ match.player1.playerId }}</h4></a
           >
@@ -97,7 +97,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-12 mt-5" *ngIf="leg.player1Throws.length === 0 ? false : true">
+            <div class="col-12 mt-5" *ngIf="actualGame">
               <div class="row justify-content-center">
                 <ngb-pagination
                   [collectionSize]="leg.player1Throws.length"
@@ -114,12 +114,12 @@
                 <h6>Number of round</h6>
               </div>
             </div>
-            <ng-template class="col-12" [ngIf]="leg.player1Throws.length === 0 ? true : false">
+            <ng-template class="col-12" [ngIf]="leg.player1Throws.length === 0 && loadedMatch ? true : false">
               <h1>Do you continue the game?</h1>
             </ng-template>
           </ng-template>
         </li>
-        <li [ngbNavItem]="player2TheNext">
+        <li [ngbNavItem]="2">
           <a ngbNavLink
             ><h4>{{ match.player2.playerId }}</h4></a
           >

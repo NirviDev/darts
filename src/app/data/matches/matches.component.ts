@@ -3,8 +3,8 @@ import { Subscription } from 'rxjs';
 
 import { DataService } from '../data.service';
 import { DataStorageService } from '../data-storage.service';
-import { Match } from '../match.model';
 import { GameService } from 'src/app/game/game.service';
+import { Match } from '../match.model';
 
 @Component({
   selector: 'app-matches',
@@ -14,6 +14,8 @@ import { GameService } from 'src/app/game/game.service';
 export class MatchesComponent implements OnInit, OnDestroy {
   matches: Match[];
   subscription: Subscription;
+
+  actualGameMatchId: string;
 
   constructor (private dataService: DataService, private dataStorageService: DataStorageService, private gameService: GameService) {}
 
@@ -25,6 +27,14 @@ export class MatchesComponent implements OnInit, OnDestroy {
       }
     );
   this.matches = this.dataService.getMatches();
+
+  this.subscription = this.gameService.matchIdChanged
+    .subscribe(
+      (matchId: string) => {
+        this.actualGameMatchId = matchId;
+      }
+    );
+  this.actualGameMatchId = this.gameService.getMatchId();
   }
 
   onFetchLegs(matchId: string) {

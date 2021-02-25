@@ -39,7 +39,7 @@
           <h5>Legs to win: {{ match.legsToWin }}</h5>
           <h5>{{ match.player1.firstName }} {{ match.player1.lastName }} score: {{ match.player1Score }}</h5>
           <h5>{{ match.player2.firstName }} {{ match.player2.lastName }} score: {{ match.player2Score }}</h5>
-          <button routerLink="/game" class="btn btn-info m-3 px-5 rounded-pill border-dark btn-shadow" (click)="onFetchLegs(match.matchId)">Legs</button>
+          <button routerLink="/game" *ngIf="match.matchId === actualGameMatchId ? false : true" class="btn btn-info m-3 px-5 rounded-pill border-dark btn-shadow" (click)="onFetchLegs(match.matchId)">Legs</button>
         </div>
         <div class="col text-center">
           <h4>{{ match.player2.firstName }} {{ match.player2.lastName }}</h4>

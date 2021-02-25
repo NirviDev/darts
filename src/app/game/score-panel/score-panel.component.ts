@@ -26,10 +26,10 @@ export class ScorePanelComponent implements OnInit, OnDestroy {
 
   matches: Match[];
 
-  matchId = '';
+  matchId:string = "";
   match: Match;
   legs: Leg[];
-  throw: Throw[];
+  throw: Throw;
 
   player1TheNext: boolean = null;
   player2TheNext: boolean = null;
@@ -77,6 +77,8 @@ export class ScorePanelComponent implements OnInit, OnDestroy {
   }
 
   loadMatchDetails() {
+    console.log("Loaded match");
+
     this.subscription = this.dataService.matchIdChanged.subscribe(
       (matchId: string) => {
         this.matchId = matchId;
@@ -96,7 +98,6 @@ export class ScorePanelComponent implements OnInit, OnDestroy {
         this.match = match;
       }
     });
-    console.log('ScoreMatch: ', this.match);
 
     this.subscription = this.dataService.legsChanged.subscribe(
       (legs: Leg[]) => {
@@ -104,6 +105,31 @@ export class ScorePanelComponent implements OnInit, OnDestroy {
       }
     );
     this.legs = this.dataService.getLegs();
+  }
+
+  loadActualGame() {
+    console.log("Actual match");
+
+    this.subscription = this.gameService.matchIdChanged.subscribe(
+      (matchId: string) => {
+        this.matchId = matchId;
+      }
+    );
+    this.matchId = this.gameService.getMatchId();
+
+    this.subscription = this.gameService.matchChanged.subscribe(
+      (match: Match) => {
+        this.match = match;
+      }
+    );
+    this.match = this.gameService.getMatch();
+
+    this.subscription = this.gameService.legsChanged.subscribe(
+      (legs: Leg[]) => {
+        this.legs = legs;
+      }
+    );
+    this.legs = this.gameService.getLegs();
 
     setTimeout(() => {
       if (
@@ -139,9 +165,14 @@ export class ScorePanelComponent implements OnInit, OnDestroy {
         ) {
           this.player1TheNext = true;
           this.player2TheNext = false;
+
+          this.throw = {playerId: this.match.player1.playerId, darts: [], score: 0, round: 1};
+
+          this.gameService.addPlayer1Throw(this.throw);
           console.log('Player1 the next player');
           console.log('Player1', this.player1TheNext);
           console.log('Player2', this.player2TheNext);
+          console.log("Throw ", this.throw)
         } else if (
           player2Throws.length <
             player1Throws.length &&
@@ -156,22 +187,6 @@ export class ScorePanelComponent implements OnInit, OnDestroy {
         console.log('Closed match visit: false');
       }
     }, 500);
-  }
-
-  loadActualGame() {
-    this.subscription = this.gameService.matchChanged.subscribe(
-      (match: Match) => {
-        this.match = match;
-      }
-    );
-    this.match = this.gameService.getMatch();
-
-    this.subscription = this.gameService.legsChanged.subscribe(
-      (legs: Leg[]) => {
-        this.legs = legs;
-      }
-    );
-    this.legs = this.gameService.getLegs();
   }
 
   scoreCalculator(allThrow, actualRound: number) {
@@ -196,6 +211,7 @@ export class ScorePanelComponent implements OnInit, OnDestroy {
     this.gameService.setActualGame(true);
     this.gameService.setChangeActualAndLoaded(false);
 
+    this.gameService.setMatchId(this.matchId);
     this.gameService.setMatch(this.match);
     this.gameService.setLegs(this.legs);
 
