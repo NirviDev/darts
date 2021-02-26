@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output} from '@angular/core';
+import { GameService } from '../game.service';
 
 @Component({
   selector: 'app-dartboard',
@@ -6,13 +7,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dartboard.component.css']
 })
 export class DartboardComponent implements OnInit {
+/*   @Output() dartsThrow: EventEmitter<number> = new EventEmitter<number>(); */
 
-  constructor() { }
+  constructor(private gameService: GameService) { }
 
   ngOnInit(): void {
   }
 
-  onClick(sector, multiplier) {
+  onClick(event: any, sector: number, multiplier: number) {
+    let dartsThrowText = event.target.attributes.id.value;
+    let dartsThrowScore = sector * multiplier;
+    this.gameService.setAddDart(dartsThrowText, dartsThrowScore);
+    console.log("Throw text: ", dartsThrowText)
+    console.log("Throw score: ", dartsThrowScore)
   }
 
 }

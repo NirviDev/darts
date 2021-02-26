@@ -1,3 +1,44 @@
 #dartboard {
   max-width: 85%;
 }
+
+.red {
+  fill: red;
+}
+
+.red:hover {
+  fill: #FF6961;
+}
+
+.green {
+  fill: green;
+}
+
+.green:hover {
+  fill: #77DD77;
+}
+
+.white {
+  fill: #EEEECC;
+}
+
+.white:hover {
+  fill: #F5B688;
+}
+
+.black {
+  fill: black;
+}
+
+.black:hover {
+  fill: #404040;
+}
+
+text {
+  text-anchor: middle;
+  /* alignment-baseline: middle; */
+  font: normal 20px/20px arial, sans-serif;
+  fill: #dddddd;
+  stroke-width: 0;
+  cursor: default;
+}

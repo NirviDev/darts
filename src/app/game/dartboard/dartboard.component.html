@@ -25,32 +25,32 @@
       />
     </defs>
 
-    <circle id="miss" (click)="onClick(0, 0)" r="125" class="black" />
+    <circle id="MISS" (click)="onClick($event, 0, 0)" r="125" class="black" />
     <g stroke-width="1" stroke="#CFCFC4">
-      <circle id="s25" (click)="onClick(25, 1)" r="20" class="green" />
-      <circle id="d25" (click)="onClick(25, 2)" r="9" class="red" />
+      <circle id="25" (click)="onClick($event, 25, 1)" r="20" class="green" />
+      <circle id="BULL" (click)="onClick($event, 25, 2)" r="9" class="red" />
       <g>
         <use
-          id="s20"
-          (click)="onClick(20, 1)"
+          id="20"
+          (click)="onClick($event, 20, 1)"
           xlink:href="#inner"
           class="black"
         />
         <use
-          id="t20"
-          (click)="onClick(20, 3)"
+          id="T20"
+          (click)="onClick($event, 20, 3)"
           xlink:href="#tripple"
           class="red"
         />
         <use
-          id="s20"
-          (click)="onClick(20, 1)"
+          id="20"
+          (click)="onClick($event, 20, 1)"
           xlink:href="#outer"
           class="black"
         />
         <use
-          id="d20"
-          (click)="onClick(20, 2)"
+          id="D20"
+          (click)="onClick($event, 20, 2)"
           xlink:href="#double"
           class="red"
         />
@@ -58,26 +58,26 @@
       </g>
       <g transform="rotate(18)">
         <use
-          id="s1"
-          (click)="onClick(1, 1)"
+          id="1"
+          (click)="onClick($event, 1, 1)"
           xlink:href="#inner"
           class="white"
         />
         <use
-          id="t1"
-          (click)="onClick(1, 3)"
+          id="T1"
+          (click)="onClick($event, 1, 3)"
           xlink:href="#tripple"
           class="green"
         />
         <use
-          id="s1"
-          (click)="onClick(1, 1)"
+          id="1"
+          (click)="onClick($event, 1, 1)"
           xlink:href="#outer"
           class="white"
         />
         <use
-          id="d1"
-          (click)="onClick(1, 2)"
+          id="D1"
+          (click)="onClick($event, 1, 2)"
           xlink:href="#double"
           class="green"
         />
@@ -85,26 +85,26 @@
       </g>
       <g transform="rotate(36)">
         <use
-          id="s18"
-          (click)="onClick(18, 1)"
+          id="18"
+          (click)="onClick($event, 18, 1)"
           xlink:href="#inner"
           class="black"
         />
         <use
-          id="t18"
-          (click)="onClick(18, 3)"
+          id="T18"
+          (click)="onClick($event, 18, 3)"
           xlink:href="#tripple"
           class="red"
         />
         <use
-          id="s18"
-          (click)="onClick(18, 1)"
+          id="18"
+          (click)="onClick($event, 18, 1)"
           xlink:href="#outer"
           class="black"
         />
         <use
-          id="d18"
-          (click)="onClick(18, 2)"
+          id="D18"
+          (click)="onClick($event, 18, 2)"
           xlink:href="#double"
           class="red"
         />
@@ -112,26 +112,26 @@
       </g>
       <g transform="rotate(54)">
         <use
-          id="s4"
-          (click)="onClick(4, 1)"
+          id="4"
+          (click)="onClick($event, 4, 1)"
           xlink:href="#inner"
           class="white"
         />
         <use
-          id="t4"
-          (click)="onClick(4, 3)"
+          id="T4"
+          (click)="onClick($event, 4, 3)"
           xlink:href="#tripple"
           class="green"
         />
         <use
-          id="s4"
-          (click)="onClick(4, 1)"
+          id="4"
+          (click)="onClick($event, 4, 1)"
           xlink:href="#outer"
           class="white"
         />
         <use
-          id="d4"
-          (click)="onClick(4, 2)"
+          id="D4"
+          (click)="onClick($event, 4, 2)"
           xlink:href="#double"
           class="green"
         />
@@ -139,26 +139,26 @@
       </g>
       <g transform="rotate(72)">
         <use
-          id="s13"
-          (click)="onClick(13, 1)"
+          id="13"
+          (click)="onClick($event, 13, 1)"
           xlink:href="#inner"
           class="black"
         />
         <use
-          id="t13"
-          (click)="onClick(13, 3)"
+          id="T13"
+          (click)="onClick($event, 13, 3)"
           xlink:href="#tripple"
           class="red"
         />
         <use
-          id="s13"
-          (click)="onClick(13, 1)"
+          id="13"
+          (click)="onClick($event, 13, 1)"
           xlink:href="#outer"
           class="black"
         />
         <use
-          id="d13"
-          (click)="onClick(13, 2)"
+          id="D13"
+          (click)="onClick($event, 13, 2)"
           xlink:href="#double"
           class="red"
         />
@@ -166,26 +166,26 @@
       </g>
       <g transform="rotate(90)">
         <use
-          id="s6"
-          (click)="onClick(6, 1)"
+          id="6"
+          (click)="onClick($event, 6, 1)"
           xlink:href="#inner"
           class="white"
         />
         <use
-          id="t6"
-          (click)="onClick(6, 3)"
+          id="T6"
+          (click)="onClick($event, 6, 3)"
           xlink:href="#tripple"
           class="green"
         />
         <use
-          id="s6"
-          (click)="onClick(6, 1)"
+          id="6"
+          (click)="onClick($event, 6, 1)"
           xlink:href="#outer"
           class="white"
         />
         <use
-          id="d6"
-          (click)="onClick(6, 2)"
+          id="D6"
+          (click)="onClick($event, 6, 2)"
           xlink:href="#double"
           class="green"
         />
@@ -193,26 +193,26 @@
       </g>
       <g transform="rotate(108)">
         <use
-          id="s10"
-          (click)="onClick(10, 1)"
+          id="10"
+          (click)="onClick($event, 10, 1)"
           xlink:href="#inner"
           class="black"
         />
         <use
-          id="t10"
-          (click)="onClick(10, 3)"
+          id="T10"
+          (click)="onClick($event, 10, 3)"
           xlink:href="#tripple"
           class="red"
         />
         <use
-          id="s10"
-          (click)="onClick(10, 1)"
+          id="10"
+          (click)="onClick($event, 10, 1)"
           xlink:href="#outer"
           class="black"
         />
         <use
-          id="d10"
-          (click)="onClick(10, 2)"
+          id="D10"
+          (click)="onClick($event, 10, 2)"
           xlink:href="#double"
           class="red"
         />
@@ -220,26 +220,26 @@
       </g>
       <g transform="rotate(126)">
         <use
-          id="s15"
-          (click)="onClick(15, 1)"
+          id="15"
+          (click)="onClick($event, 15, 1)"
           xlink:href="#inner"
           class="white"
         />
         <use
-          id="t15"
-          (click)="onClick(15, 3)"
+          id="T15"
+          (click)="onClick($event, 15, 3)"
           xlink:href="#tripple"
           class="green"
         />
         <use
-          id="s15"
-          (click)="onClick(15, 1)"
+          id="15"
+          (click)="onClick($event, 15, 1)"
           xlink:href="#outer"
           class="white"
         />
         <use
-          id="d15"
-          (click)="onClick(15, 2)"
+          id="D15"
+          (click)="onClick($event, 15, 2)"
           xlink:href="#double"
           class="green"
         />
@@ -247,48 +247,53 @@
       </g>
       <g transform="rotate(144)">
         <use
-          id="s2"
-          (click)="onClick(2, 1)"
+          id="2"
+          (click)="onClick($event, 2, 1)"
           xlink:href="#inner"
           class="black"
         />
         <use
-          id="t2"
-          (click)="onClick(2, 3)"
+          id="T2"
+          (click)="onClick($event, 2, 3)"
           xlink:href="#tripple"
           class="red"
         />
         <use
-          id="s2"
-          (click)="onClick(2, 1)"
+          id="2"
+          (click)="onClick($event, 2, 1)"
           xlink:href="#outer"
           class="black"
         />
-        <use id="d2" (click)="onClick(2, 2)" xlink:href="#double" class="red" />
+        <use
+          id="D2"
+          (click)="onClick($event, 2, 2)"
+          xlink:href="#double"
+          class="red"
+        />
         <text x="0" y="-110">2</text>
       </g>
       <g transform="rotate(162)">
         <use
-          id="s17"
-          (click)="onClick(17, 1)"
+          id="17"
+          (click)="onClick($event, 17, 1)"
           xlink:href="#inner"
           class="white"
         />
         <use
-          id="t17"
-          (click)="onClick(17, 3)"
+          id="T17"
+          (click)="onClick($event, 17, 3)"
           xlink:href="#tripple"
           class="green"
         />
         <use
-          id="s17"
-          (click)="onClick(17, 1)"
+          id="17"
+          (click)="onClick($event, 17, 1)"
           xlink:href="#outer"
           class="white"
         />
         <use
-          id="d17"
-          (click)="onClick(17, 2)"
+          id="D17"
+          (click)="onClick($event, 17, 2)"
           xlink:href="#double"
           class="green"
         />
@@ -296,48 +301,53 @@
       </g>
       <g transform="rotate(180)">
         <use
-          id="s3"
-          (click)="onClick(3, 1)"
+          id="3"
+          (click)="onClick($event, 3, 1)"
           xlink:href="#inner"
           class="black"
         />
         <use
-          id="t3"
-          (click)="onClick(3, 3)"
+          id="T3"
+          (click)="onClick($event, 3, 3)"
           xlink:href="#tripple"
           class="red"
         />
         <use
-          id="s3"
-          (click)="onClick(3, 1)"
+          id="3"
+          (click)="onClick($event, 3, 1)"
           xlink:href="#outer"
           class="black"
         />
-        <use id="d3" (click)="onClick(3, 2)" xlink:href="#double" class="red" />
+        <use
+          id="D3"
+          (click)="onClick($event, 3, 2)"
+          xlink:href="#double"
+          class="red"
+        />
         <text x="0" y="-110">3</text>
       </g>
       <g transform="rotate(-162)">
         <use
-          id="s19"
-          (click)="onClick(19, 1)"
+          id="19"
+          (click)="onClick($event, 19, 1)"
           xlink:href="#inner"
           class="white"
         />
         <use
-          id="t19"
-          (click)="onClick(19, 3)"
+          id="T19"
+          (click)="onClick($event, 19, 3)"
           xlink:href="#tripple"
           class="green"
         />
         <use
-          id="s19"
-          (click)="onClick(19, 1)"
+          id="19"
+          (click)="onClick($event, 19, 1)"
           xlink:href="#outer"
           class="white"
         />
         <use
-          id="d19"
-          (click)="onClick(19, 2)"
+          id="D19"
+          (click)="onClick($event, 19, 2)"
           xlink:href="#double"
           class="green"
         />
@@ -345,48 +355,53 @@
       </g>
       <g transform="rotate(-144)">
         <use
-          id="s7"
-          (click)="onClick(7, 1)"
+          id="7"
+          (click)="onClick($event, 7, 1)"
           xlink:href="#inner"
           class="black"
         />
         <use
-          id="t7"
-          (click)="onClick(7, 3)"
+          id="T7"
+          (click)="onClick($event, 7, 3)"
           xlink:href="#tripple"
           class="red"
         />
         <use
-          id="s7"
-          (click)="onClick(7, 1)"
+          id="7"
+          (click)="onClick($event, 7, 1)"
           xlink:href="#outer"
           class="black"
         />
-        <use id="d7" (click)="onClick(7, 2)" xlink:href="#double" class="red" />
+        <use
+          id="D7"
+          (click)="onClick($event, 7, 2)"
+          xlink:href="#double"
+          class="red"
+        />
         <text x="0" y="-110">7</text>
       </g>
       <g transform="rotate(-126)">
         <use
-          id="s16"
-          (click)="onClick(16, 1)"
+          id="16"
+          (click)="onClick($event, 16, 1)"
           xlink:href="#inner"
           class="white"
         />
         <use
-          id="t16"
-          (click)="onClick(16, 3)"
+          id="T16"
+          (click)="onClick($event, 16, 3)"
           xlink:href="#tripple"
           class="green"
         />
         <use
-          id="s16"
-          (click)="onClick(16, 1)"
+          id="16"
+          (click)="onClick($event, 16, 1)"
           xlink:href="#outer"
           class="white"
         />
         <use
-          id="d16"
-          (click)="onClick(16, 2)"
+          id="D16"
+          (click)="onClick($event, 16, 2)"
           xlink:href="#double"
           class="green"
         />
@@ -394,48 +409,53 @@
       </g>
       <g transform="rotate(-108)">
         <use
-          id="s8"
-          (click)="onClick(8, 1)"
+          id="8"
+          (click)="onClick($event, 8, 1)"
           xlink:href="#inner"
           class="black"
         />
         <use
-          id="t8"
-          (click)="onClick(8, 3)"
+          id="T8"
+          (click)="onClick($event, 8, 3)"
           xlink:href="#tripple"
           class="red"
         />
         <use
-          id="s8"
-          (click)="onClick(8, 1)"
+          id="8"
+          (click)="onClick($event, 8, 1)"
           xlink:href="#outer"
           class="black"
         />
-        <use id="d8" (click)="onClick(8, 2)" xlink:href="#double" class="red" />
+        <use
+          id="D8"
+          (click)="onClick($event, 8, 2)"
+          xlink:href="#double"
+          class="red"
+        />
         <text x="0" y="-110">8</text>
       </g>
       <g transform="rotate(-90)">
         <use
-          id="s11"
-          (click)="onClick(11, 1)"
+          id="11"
+          (click)="onClick($event, 11, 1)"
           xlink:href="#inner"
           class="white"
         />
         <use
-          id="t11"
-          (click)="onClick(11, 3)"
+          id="T11"
+          (click)="onClick($event, 11, 3)"
           xlink:href="#tripple"
           class="green"
         />
         <use
-          id="s11"
-          (click)="onClick(11, 1)"
+          id="11"
+          (click)="onClick($event, 11, 1)"
           xlink:href="#outer"
           class="white"
         />
         <use
-          id="d11"
-          (click)="onClick(11, 2)"
+          id="D11"
+          (click)="onClick($event, 11, 2)"
           xlink:href="#double"
           class="green"
         />
@@ -443,26 +463,26 @@
       </g>
       <g transform="rotate(-72)">
         <use
-          id="s14"
-          (click)="onClick(14, 1)"
+          id="14"
+          (click)="onClick($event, 14, 1)"
           xlink:href="#inner"
           class="black"
         />
         <use
-          id="t14"
-          (click)="onClick(14, 3)"
+          id="T14"
+          (click)="onClick($event, 14, 3)"
           xlink:href="#tripple"
           class="red"
         />
         <use
-          id="s14"
-          (click)="onClick(14, 1)"
+          id="14"
+          (click)="onClick($event, 14, 1)"
           xlink:href="#outer"
           class="black"
         />
         <use
-          id="d14"
-          (click)="onClick(14, 2)"
+          id="D14"
+          (click)="onClick($event, 14, 2)"
           xlink:href="#double"
           class="red"
         />
@@ -470,26 +490,26 @@
       </g>
       <g transform="rotate(-54)">
         <use
-          id="s9"
-          (click)="onClick(9, 1)"
+          id="9"
+          (click)="onClick($event, 9, 1)"
           xlink:href="#inner"
           class="white"
         />
         <use
-          id="t9"
-          (click)="onClick(9, 3)"
+          id="T9"
+          (click)="onClick($event, 9, 3)"
           xlink:href="#tripple"
           class="green"
         />
         <use
-          id="s9"
-          (click)="onClick(9, 1)"
+          id="9"
+          (click)="onClick($event, 9, 1)"
           xlink:href="#outer"
           class="white"
         />
         <use
-          id="d9"
-          (click)="onClick(9, 2)"
+          id="D9"
+          (click)="onClick($event, 9, 2)"
           xlink:href="#double"
           class="green"
         />
@@ -497,26 +517,26 @@
       </g>
       <g transform="rotate(-36)">
         <use
-          id="s12"
-          (click)="onClick(12, 1)"
+          id="12"
+          (click)="onClick($event, 12, 1)"
           xlink:href="#inner"
           class="black"
         />
         <use
-          id="t12"
-          (click)="onClick(12, 3)"
+          id="T12"
+          (click)="onClick($event, 12, 3)"
           xlink:href="#tripple"
           class="red"
         />
         <use
-          id="s12"
-          (click)="onClick(12, 1)"
+          id="12"
+          (click)="onClick($event, 12, 1)"
           xlink:href="#outer"
           class="black"
         />
         <use
-          id="d12"
-          (click)="onClick(12, 2)"
+          id="D12"
+          (click)="onClick($event, 12, 2)"
           xlink:href="#double"
           class="red"
         />
@@ -524,26 +544,26 @@
       </g>
       <g transform="rotate(-18)">
         <use
-          id="s5"
-          (click)="onClick(5, 1)"
+          id="5"
+          (click)="onClick($event, 5, 1)"
           xlink:href="#inner"
           class="white"
         />
         <use
-          id="t5"
-          (click)="onClick(5, 3)"
+          id="T5"
+          (click)="onClick($event, 5, 3)"
           xlink:href="#tripple"
           class="green"
         />
         <use
-          id="s5"
-          (click)="onClick(5, 1)"
+          id="5"
+          (click)="onClick($event, 5, 1)"
           xlink:href="#outer"
           class="white"
         />
         <use
-          id="d5"
-          (click)="onClick(5, 2)"
+          id="D5"
+          (click)="onClick($event, 5, 2)"
           xlink:href="#double"
           class="green"
         />

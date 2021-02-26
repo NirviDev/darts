@@ -131,6 +131,20 @@ export class ScorePanelComponent implements OnInit, OnDestroy {
     );
     this.legs = this.gameService.getLegs();
 
+    this.subscription = this.gameService.player1TheNextChanged.subscribe(
+      (boolean: boolean) => {
+        this.player1TheNext = boolean;
+      }
+    );
+    this.player1TheNext = this.gameService.getPlayer1TheNext();
+
+    this.subscription = this.gameService.player2TheNextChanged.subscribe(
+      (boolean: boolean) => {
+        this.player2TheNext = boolean;
+      }
+    );
+    this.player2TheNext = this.gameService.getPlayer2TheNext();
+
     setTimeout(() => {
       if (
         this.match.legsToWin !== this.match.player1Score &&
@@ -163,10 +177,10 @@ export class ScorePanelComponent implements OnInit, OnDestroy {
             player2Throws.length &&
             player2Score != 501)
         ) {
-          this.player1TheNext = true;
-          this.player2TheNext = false;
+          this.gameService.setPlayer1TheNext(true);
+          this.gameService.setPlayer2TheNext(false);
 
-          this.throw = {playerId: this.match.player1.playerId, darts: [], score: 0, round: 1};
+          this.throw = {playerId: this.match.player1.playerId, darts: ["", "", ""], score: 0, round: 1};
 
           this.gameService.addPlayer1Throw(this.throw);
           console.log('Player1 the next player');
@@ -178,8 +192,8 @@ export class ScorePanelComponent implements OnInit, OnDestroy {
             player1Throws.length &&
           player1Score != 501
         ) {
-          this.player2TheNext = true;
-          this.player1TheNext = false;
+          this.gameService.setPlayer1TheNext(false);
+          this.gameService.setPlayer2TheNext(true);
           console.log('Player2 the next player');
           console.log('Player1', this.player1TheNext);
           console.log('Player2', this.player2TheNext);

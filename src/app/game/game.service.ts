@@ -12,6 +12,10 @@ export class GameService {
   actualGameChanged = new BehaviorSubject<boolean>(null);
   changeActualAndLoadedChanged = new BehaviorSubject<boolean>(null);
 
+  dartsThrowNumberChanged = new BehaviorSubject<number>(0);
+  player1TheNextChanged = new BehaviorSubject<boolean>(null);
+  player2TheNextChanged = new BehaviorSubject<boolean>(null);
+
   matchIdChanged = new Subject<string>();
   matchChanged = new Subject<Match>();
   legsChanged = new Subject<Leg[]>();
@@ -20,6 +24,10 @@ export class GameService {
   private loadedMatch: boolean = null;
   private actualGame: boolean = null;
   private changeActualAndLoaded: boolean = null;
+
+  private dartsThrowNumber: number = 0;
+  private player1TheNext: boolean = null;
+  private player2TheNext: boolean = null;
 
   private matchId: string;
   private match: Match;
@@ -92,5 +100,37 @@ export class GameService {
 
   getChangeActualAndLoaded() {
     return this.changeActualAndLoaded;
+  }
+
+  setPlayer1TheNext(boolean: boolean){
+    this.player1TheNext = boolean;
+    this.player1TheNextChanged.next(this.player1TheNext);
+  }
+
+  getPlayer1TheNext() {
+    return this.player1TheNext;
+  }
+
+  setPlayer2TheNext(boolean: boolean){
+    this.player2TheNext = boolean;
+    this.player2TheNextChanged.next(this.player2TheNext);
+  }
+
+  getPlayer2TheNext() {
+    return this.player2TheNext;
+  }
+
+  setAddDart(dartsThrowText: string, dartsThrowScore: number) {
+    console.log("Add dart")
+
+    if(this.player1TheNext){
+      this.legs[this.legs.length-1].player1Throws[this.legs[this.legs.length-1].player1Throws.length-1].darts[this.dartsThrowNumber] = dartsThrowText;
+      this.legs[this.legs.length-1].player1Throws[this.legs[this.legs.length-1].player1Throws.length-1].score += dartsThrowScore;
+      this.dartsThrowNumber += 1;
+
+      this.dartsThrowNumberChanged.next(this.dartsThrowNumber);
+      this.legsChanged.next(this.legs.slice());
+    }
+    console.log(this.legs);
   }
 }
