@@ -66,6 +66,11 @@ export class GameService {
     this.legsChanged.next(this.legs.slice());
   }
 
+  addPlayer2Throw(player2Throw: Throw) {
+    this.legs[this.legs.length-1].player2Throws.push(player2Throw);
+    this.legsChanged.next(this.legs.slice());
+  }
+
   setScorePanelActive(boolean: boolean){
     this.scorePanelActive = boolean;
     this.scorePanelActiveChanged.next(this.scorePanelActive);
@@ -122,15 +127,29 @@ export class GameService {
 
   setAddDart(dartsThrowText: string, dartsThrowScore: number) {
     console.log("Add dart")
+    let player1Throws = this.legs[this.legs.length-1].player1Throws[this.legs[this.legs.length-1].player1Throws.length-1];
+    let player2Throws = this.legs[this.legs.length-1].player2Throws[this.legs[this.legs.length-1].player2Throws.length-1];
 
-    if(this.player1TheNext){
-      this.legs[this.legs.length-1].player1Throws[this.legs[this.legs.length-1].player1Throws.length-1].darts[this.dartsThrowNumber] = dartsThrowText;
-      this.legs[this.legs.length-1].player1Throws[this.legs[this.legs.length-1].player1Throws.length-1].score += dartsThrowScore;
+    if(this.player1TheNext && this.scorePanelActive){
+      player1Throws.darts[this.dartsThrowNumber] = dartsThrowText;
+      player1Throws.score += dartsThrowScore;
+      this.dartsThrowNumber += 1;
+
+      this.dartsThrowNumberChanged.next(this.dartsThrowNumber);
+      this.legsChanged.next(this.legs.slice());
+    } else if(this.player2TheNext && this.scorePanelActive){
+      player2Throws.darts[this.dartsThrowNumber] = dartsThrowText;
+      player2Throws.score += dartsThrowScore;
       this.dartsThrowNumber += 1;
 
       this.dartsThrowNumberChanged.next(this.dartsThrowNumber);
       this.legsChanged.next(this.legs.slice());
     }
     console.log(this.legs);
+    console.log(this.dartsThrowNumber);
+  }
+
+  getDartsThrowNumber() {
+    return this.dartsThrowNumber;
   }
 }

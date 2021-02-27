@@ -18,7 +18,8 @@ export class NewGamePanelComponent implements OnInit, OnDestroy {
   players: Player[];
   subscription: Subscription;
 
-  loadedMatch = null;
+  loadedMatch: boolean = null;
+  actualGame: boolean = null;
 
   defaultLegsToWin = 3;
   player1:string;
@@ -41,6 +42,22 @@ export class NewGamePanelComponent implements OnInit, OnDestroy {
       }
     );
     this.players = this.dataService.getPlayers();
+
+    this.subscription = this.gameService.loadedMatchChanged.subscribe(
+      (loadedMatch: boolean) => {
+        this.loadedMatch = loadedMatch;
+      }
+    );
+    this.loadedMatch = this.gameService.getLoadedMatch();
+
+    this.subscription = this.gameService.actualGameChanged.subscribe(
+      (actualGame: boolean) => {
+        this.actualGame = actualGame;
+      }
+    );
+    this.actualGame = this.gameService.getActualGame();
+
+    setTimeout(() => {console.log("New panel actual game status: ", this.actualGame)}, 500)
   }
 
   onSubmit() {

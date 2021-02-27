@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
 
 import { DataService } from 'src/app/data/data.service';
 import { GameService } from '../game.service';
+import { GameStorageService } from '../game-storage.service';
 import { Match } from 'src/app/data/match.model';
 import { Leg } from 'src/app/data/leg.model';
 import { Throw } from 'src/app/data/throw.model';
@@ -31,6 +32,7 @@ export class ScorePanelComponent implements OnInit, OnDestroy {
   legs: Leg[];
   throw: Throw;
 
+  dartsThrowNumber: number = 0;
   player1TheNext: boolean = null;
   player2TheNext: boolean = null;
 
@@ -42,7 +44,8 @@ export class ScorePanelComponent implements OnInit, OnDestroy {
 
   constructor(
     private dataService: DataService,
-    private gameService: GameService
+    private gameService: GameService,
+    private gameStorageService: GameStorageService
   ) {}
 
   ngOnInit(): void {
@@ -145,6 +148,13 @@ export class ScorePanelComponent implements OnInit, OnDestroy {
     );
     this.player2TheNext = this.gameService.getPlayer2TheNext();
 
+    this.subscription = this.gameService.dartsThrowNumberChanged.subscribe(
+      (dartsThrowNumber: number) => {
+        this.dartsThrowNumber = dartsThrowNumber;
+      }
+    );
+    this.dartsThrowNumber = this.gameService.getDartsThrowNumber();
+
     setTimeout(() => {
       if (
         this.match.legsToWin !== this.match.player1Score &&
@@ -171,16 +181,15 @@ export class ScorePanelComponent implements OnInit, OnDestroy {
         }
         console.log('Player2 score: ', player2Score);
 
-        if (
-          player1Throws.length < 1 ||
-          (player1Throws.length ==
+        if (player1Throws.length ===
             player2Throws.length &&
-            player2Score != 501)
+            this.dartsThrowNumber === 0 &&
+            player2Score != 501
         ) {
           this.gameService.setPlayer1TheNext(true);
           this.gameService.setPlayer2TheNext(false);
 
-          this.throw = {playerId: this.match.player1.playerId, darts: ["", "", ""], score: 0, round: 1};
+          this.throw = {playerId: this.match.player1.playerId, darts: ["", "", ""], score: 0, round: player1Throws.length + 1};
 
           this.gameService.addPlayer1Throw(this.throw);
           console.log('Player1 the next player');
@@ -189,14 +198,20 @@ export class ScorePanelComponent implements OnInit, OnDestroy {
           console.log("Throw ", this.throw)
         } else if (
           player2Throws.length <
-            player1Throws.length &&
+          player1Throws.length &&
+          this.dartsThrowNumber === 0 &&
           player1Score != 501
         ) {
           this.gameService.setPlayer1TheNext(false);
           this.gameService.setPlayer2TheNext(true);
+
+          this.throw = {playerId: this.match.player2.playerId, darts: ["", "", ""], score: 0, round: player2Throws.length + 1};
+
+          this.gameService.addPlayer2Throw(this.throw);
           console.log('Player2 the next player');
           console.log('Player1', this.player1TheNext);
           console.log('Player2', this.player2TheNext);
+          console.log("Throw ", this.throw)
         }
         console.log('Closed match visit: false');
       }
@@ -230,6 +245,16 @@ export class ScorePanelComponent implements OnInit, OnDestroy {
     this.gameService.setLegs(this.legs);
 
     this.loadActualGame();
+  }
+
+  onAddThrow() {
+    if(this.player1TheNext) {
+      let player1Throws = this.legs[this.legs.length-1].player1Throws[this.legs[this.legs.length-1].player1Throws.length-1];
+      this.gameStorageService.addThrow(this.matchId, player1Throws);
+    } else if(this.player2TheNext) {
+      let player2Throws = this.legs[this.legs.length-1].player2Throws[this.legs[this.legs.length-1].player2Throws.length-1];
+      this.gameStorageService.addThrow(this.matchId, player2Throws);
+    }
   }
 
   ngOnDestroy() {
