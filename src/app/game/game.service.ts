@@ -130,14 +130,14 @@ export class GameService {
     let player1Throws = this.legs[this.legs.length-1].player1Throws[this.legs[this.legs.length-1].player1Throws.length-1];
     let player2Throws = this.legs[this.legs.length-1].player2Throws[this.legs[this.legs.length-1].player2Throws.length-1];
 
-    if(this.player1TheNext && this.scorePanelActive){
+    if(this.player1TheNext && this.scorePanelActive && this.dartsThrowNumber < 3){
       player1Throws.darts[this.dartsThrowNumber] = dartsThrowText;
       player1Throws.score += dartsThrowScore;
       this.dartsThrowNumber += 1;
 
       this.dartsThrowNumberChanged.next(this.dartsThrowNumber);
       this.legsChanged.next(this.legs.slice());
-    } else if(this.player2TheNext && this.scorePanelActive){
+    } else if(this.player2TheNext && this.scorePanelActive && this.dartsThrowNumber < 3){
       player2Throws.darts[this.dartsThrowNumber] = dartsThrowText;
       player2Throws.score += dartsThrowScore;
       this.dartsThrowNumber += 1;
@@ -147,6 +147,11 @@ export class GameService {
     }
     console.log(this.legs);
     console.log(this.dartsThrowNumber);
+  }
+
+  setDartsThrowNumber(dartsThrowNumber: number) {
+    this.dartsThrowNumber = dartsThrowNumber;
+    this.dartsThrowNumberChanged.next(this.dartsThrowNumber);
   }
 
   getDartsThrowNumber() {

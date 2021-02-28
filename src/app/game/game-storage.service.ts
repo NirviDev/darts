@@ -2,14 +2,19 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 
 import { environment } from '../../environments/environment';
-import { Match } from '../data/match.model';
 import { GameService } from './game.service';
+import { Match } from '../data/match.model';
 import { Throw } from '../data/throw.model';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class GameStorageService {
   proxy: string = "http://127.0.0.1:8080/";
   baseUrl: string = 'https://insimu-darts-api.azurewebsites.net/darts_api/';
+
+  addThrowBackDataChanged = new BehaviorSubject<boolean>(null);
+
+  addThrowBackData: boolean = null;
 
   constructor(
     private http: HttpClient,
@@ -44,8 +49,18 @@ export class GameStorageService {
       this.proxy + this.baseUrl + "addThrow?matchId=" + matchId,
       playerThrow, {headers: httpHeaders}
     ).subscribe(playerThrow => {
-      /* this.gameService.setMatch(playerThrow); */
+      this.addThrowBackData = true;
+      this.addThrowBackDataChanged.next(this.addThrowBackData);
       console.log("Add throw back data", playerThrow)
     });
+  }
+
+  setAddThrowBackData(boolean: boolean) {
+    this.addThrowBackData = boolean;
+    this.addThrowBackDataChanged.next(this.addThrowBackData);
+  }
+
+  getAddThrowBackData() {
+    return this.addThrowBackData;
   }
 }

@@ -25,6 +25,8 @@ export class ScorePanelComponent implements OnInit, OnDestroy {
   actualGame = null;
   changeActualAndLoaded = null;
 
+  addThrowBackData: boolean = null;
+
   matches: Match[];
 
   matchId:string = "";
@@ -49,6 +51,8 @@ export class ScorePanelComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    console.log("#############<Score panel data>#############");
+
     this.subscription = this.gameService.loadedMatchChanged.subscribe(
       (loadedMatch: boolean) => {
         this.loadedMatch = loadedMatch;
@@ -70,6 +74,19 @@ export class ScorePanelComponent implements OnInit, OnDestroy {
     );
     this.changeActualAndLoaded = this.gameService.getChangeActualAndLoaded();
 
+    this.subscription = this.gameStorageService.addThrowBackDataChanged.subscribe(
+      (boolean: boolean) => {
+        this.addThrowBackData = boolean;
+
+        if(this.addThrowBackData){
+          this.gameService.setDartsThrowNumber(0);
+          this.loadActualGame();
+          this.gameStorageService.setAddThrowBackData(false);
+        }
+      }
+    );
+    this.addThrowBackData = this.gameStorageService.getAddThrowBackData();
+
     if (this.changeActualAndLoaded) {
       this.loadMatchDetails();
     }
@@ -80,7 +97,9 @@ export class ScorePanelComponent implements OnInit, OnDestroy {
   }
 
   loadMatchDetails() {
-    console.log("Loaded match");
+    console.log("-------------<Loaded match>-------------");
+    console.log("Loaded match status: ", this.loadedMatch)
+    console.log("Actual game status: ", this.actualGame)
 
     this.subscription = this.dataService.matchIdChanged.subscribe(
       (matchId: string) => {
@@ -111,7 +130,9 @@ export class ScorePanelComponent implements OnInit, OnDestroy {
   }
 
   loadActualGame() {
-    console.log("Actual match");
+    console.log("-------------<Actual game>-------------");
+    console.log("Loaded match status: ", this.loadedMatch)
+    console.log("Actual game status: ", this.actualGame)
 
     this.subscription = this.gameService.matchIdChanged.subscribe(
       (matchId: string) => {
@@ -155,67 +176,64 @@ export class ScorePanelComponent implements OnInit, OnDestroy {
     );
     this.dartsThrowNumber = this.gameService.getDartsThrowNumber();
 
-    setTimeout(() => {
-      if (
-        this.match.legsToWin !== this.match.player1Score &&
-        this.match.legsToWin !== this.match.player2Score
-      ) {
-        let player1Throws = this.legs[this.legs.length - 1].player1Throws;
-        let player1Score = 0;
-        let player2Throws = this.legs[this.legs.length - 1].player2Throws;
-        let player2Score = 0;
+    if (
+      this.match.legsToWin !== this.match.player1Score &&
+      this.match.legsToWin !== this.match.player2Score
+    ) {
+      console.log('This is opened match');
+      let player1Throws = this.legs[this.legs.length - 1].player1Throws;
+      let player1Score = 0;
+      let player2Throws = this.legs[this.legs.length - 1].player2Throws;
+      let player2Score = 0;
 
-        if (player1Throws.length > 0) {
-          player1Throws.map((player1Throw) => {
-            player1Score += player1Throw.score;
-          });
-          console.log('Player1 score calculated');
-        }
-        console.log('Player1 score: ', player1Score);
-
-        if (player2Throws.length > 0) {
-          player2Throws.map((player2Throw) => {
-            player2Score += player2Throw.score;
-          });
-          console.log('Player2 score calculated');
-        }
-        console.log('Player2 score: ', player2Score);
-
-        if (player1Throws.length ===
-            player2Throws.length &&
-            this.dartsThrowNumber === 0 &&
-            player2Score != 501
-        ) {
-          this.gameService.setPlayer1TheNext(true);
-          this.gameService.setPlayer2TheNext(false);
-
-          this.throw = {playerId: this.match.player1.playerId, darts: ["", "", ""], score: 0, round: player1Throws.length + 1};
-
-          this.gameService.addPlayer1Throw(this.throw);
-          console.log('Player1 the next player');
-          console.log('Player1', this.player1TheNext);
-          console.log('Player2', this.player2TheNext);
-          console.log("Throw ", this.throw)
-        } else if (
-          player2Throws.length <
-          player1Throws.length &&
-          this.dartsThrowNumber === 0 &&
-          player1Score != 501
-        ) {
-          this.gameService.setPlayer1TheNext(false);
-          this.gameService.setPlayer2TheNext(true);
-
-          this.throw = {playerId: this.match.player2.playerId, darts: ["", "", ""], score: 0, round: player2Throws.length + 1};
-
-          this.gameService.addPlayer2Throw(this.throw);
-          console.log('Player2 the next player');
-          console.log('Player1', this.player1TheNext);
-          console.log('Player2', this.player2TheNext);
-          console.log("Throw ", this.throw)
-        }
-        console.log('Closed match visit: false');
+      if (player1Throws.length > 0) {
+        player1Throws.map((player1Throw) => {
+          player1Score += player1Throw.score;
+        });
+        console.log('Player1 score calculated');
       }
-    }, 500);
+      console.log('Player1 score: ', player1Score);
+
+      if (player2Throws.length > 0) {
+        player2Throws.map((player2Throw) => {
+          player2Score += player2Throw.score;
+        });
+        console.log('Player2 score calculated');
+      }
+      console.log('Player2 score: ', player2Score);
+
+      if (player1Throws.length === 0 ||
+          player1Throws.length ===
+          player2Throws.length &&
+          this.dartsThrowNumber === 0 &&
+          player2Throws[player2Throws.length-1].darts[2] !== "" &&
+          player2Throws[player2Throws.length-1].darts[2] !== undefined &&
+          player2Score != 501
+      ) {
+        this.gameService.setPlayer1TheNext(true);
+        this.gameService.setPlayer2TheNext(false);
+
+        this.throw = {playerId: this.match.player1.playerId, darts: ["", "", ""], score: 0, round: player1Throws.length + 1};
+
+        this.gameService.addPlayer1Throw(this.throw);
+        console.log('Player1 the next player');
+      } else if (
+        player2Throws.length <
+        player1Throws.length &&
+        this.dartsThrowNumber === 0 &&
+        player1Throws[player1Throws.length-1].darts[2] !== "" &&
+        player1Throws[player1Throws.length-1].darts[2] !== undefined &&
+        player1Score != 501
+      ) {
+        this.gameService.setPlayer1TheNext(false);
+        this.gameService.setPlayer2TheNext(true);
+
+        this.throw = {playerId: this.match.player2.playerId, darts: ["", "", ""], score: 0, round: player2Throws.length + 1};
+
+        this.gameService.addPlayer2Throw(this.throw);
+        console.log('Player2 the next player');
+      }
+    }
   }
 
   scoreCalculator(allThrow, actualRound: number) {
