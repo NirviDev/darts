@@ -1,4 +1,6 @@
-import { Component, OnInit, EventEmitter, Output} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
+import { Subscription } from 'rxjs';
+
 import { GameService } from '../game.service';
 
 @Component({
@@ -7,19 +9,45 @@ import { GameService } from '../game.service';
   styleUrls: ['./dartboard.component.css']
 })
 export class DartboardComponent implements OnInit {
-/*   @Output() dartsThrow: EventEmitter<number> = new EventEmitter<number>(); */
+  subscription: Subscription;
 
-  constructor(private gameService: GameService) { }
+  actualGame: boolean = null;
+  changeActualAndLoaded: boolean = null;
+
+  dartsThrowNumber: number = 0;
+
+  constructor(private gameService: GameService) {}
 
   ngOnInit(): void {
+    this.subscription = this.gameService.actualGameChanged.subscribe(
+      (boolean: boolean) => {
+        this.actualGame = boolean;
+      }
+    );
+    this.actualGame = this.gameService.getActualGame();
+
+    this.subscription = this.gameService.changeActualAndLoadedChanged.subscribe(
+      (boolean: boolean) => {
+        this.changeActualAndLoaded = boolean;
+      }
+    );
+    this.changeActualAndLoaded = this.gameService.getChangeActualAndLoaded();
+
+    this.subscription = this.gameService.dartsThrowNumberChanged.subscribe(
+      (dartsThrowNumber: number) => {
+        this.dartsThrowNumber = dartsThrowNumber;
+      }
+    );
+    this.dartsThrowNumber = this.gameService.getDartsThrowNumber();
   }
 
   onClick(event: any, sector: number, multiplier: number) {
     let dartsThrowText = event.target.attributes.id.value;
     let dartsThrowScore = sector * multiplier;
-    this.gameService.setAddDart(dartsThrowText, dartsThrowScore);
-    console.log("Throw text: ", dartsThrowText)
-    console.log("Throw score: ", dartsThrowScore)
-  }
 
+    if(!this.changeActualAndLoaded && this.actualGame && this.dartsThrowNumber < 3) {
+      this.gameService.setAddDart(dartsThrowText, dartsThrowScore, multiplier);
+      console.log("Darts throw number: ", this.dartsThrowNumber);
+    }
+  }
 }

@@ -12,9 +12,9 @@ export class GameStorageService {
   proxy: string = "http://127.0.0.1:8080/";
   baseUrl: string = 'https://insimu-darts-api.azurewebsites.net/darts_api/';
 
-  addThrowBackDataChanged = new BehaviorSubject<boolean>(null);
+  addThrowBackDataChanged = new BehaviorSubject<boolean>(false);
 
-  addThrowBackData: boolean = null;
+  addThrowBackData: boolean = false;
 
   constructor(
     private http: HttpClient,
