@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AppComponent } from '../app.component';
+import { ThemeService } from '../shared/themes/theme.service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  public navCollapsed = true;
+
+  constructor(private appComponent: AppComponent) {}
 
   ngOnInit(): void {
+  }
+
+  onChangeTheme(name: string) {
+    this.appComponent.changeTheme(name);
   }
 
 }

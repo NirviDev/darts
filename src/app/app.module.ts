@@ -20,6 +20,9 @@ import { DataService } from './data/data.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppStartComponent } from './app-start/app-start.component';
 import { NewGamePanelComponent } from './game/new-game-panel/new-game-panel.component';
+import { ThemeModule } from './shared/themes/theme.module';
+import { darkTheme} from './shared/themes/dark-theme';
+import { isTheme } from './shared/themes/is-theme';
 
 @NgModule({
   imports: [
@@ -28,7 +31,11 @@ import { NewGamePanelComponent } from './game/new-game-panel/new-game-panel.comp
     HttpClientModule,
     CommonModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    ThemeModule.forRoot({
+      themes: [isTheme, darkTheme],
+      active: 'is'
+    })
   ],
   declarations: [
     AppComponent,

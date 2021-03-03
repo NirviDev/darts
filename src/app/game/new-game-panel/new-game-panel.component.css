@@ -1,3 +1,7 @@
+label, select, input {
+  font-size: 1.2rem;
+}
+
 select.ng-invalid.ng-touched, input.ng-invalid.ng-touched {
   border: 1px solid red;
 }
@@ -12,5 +16,5 @@ option.choose-a-player-item:disabled {
 }
 
 .new-game-footer {
-  background-color: rgb(36, 209, 163);
+  background-color: var(--nav);
 }

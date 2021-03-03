@@ -1,63 +1,77 @@
 <div class="row h-100">
-  <div class="col-12">
-    <form class="h-100" (ngSubmit)="onSubmit()" #f="ngForm">
-      <div class="row h-100">
-        <div class="col">
-          <label for="player1Id">Player 1</label>
-          <select name="player1Id" ngModel required>
-            <option class="choose-a-player-title" value="" disabled>Choose a player</option>
-            <option
-              class="choose-a-player-item"
-              *ngFor="let player1 of players"
-              [value]="player1.playerId"
-              [disabled]="player1.playerId === newGameForm.value.player2Id ? true : false"
-            >
-              {{ player1.playerId }}
-            </option>
-          </select>
-        </div>
-        <div class="col">
-          <label for="player2Id">Player 2</label>
-          <select name="player2Id" ngModel required>
-            <option class="choose-a-player-title" value="" disabled>Choose a player</option>
-            <option
-              class="choose-a-player-item"
-              *ngFor="let player2 of players"
-              [value]="player2.playerId"
-              [disabled]="player2.playerId === newGameForm.value.player1Id ? true : false"
-            >
-              {{ player2.playerId }}
-            </option>
-          </select>
-        </div>
-        <div class="col">
-          <label for="legsToWin">Legs to win</label>
-          <input
-            name="legsToWin"
-            type="number"
-            id="legsToWin"
-            [ngModel]="defaultLegsToWin"
-            required
-            min="3"
-            value="3"
-            #legsToWin="ngModel">
-          <span *ngIf="legsToWin.value < 3 ? true: false" class="help-block">Minimum value: 3!</span>
-        </div>
-        <div class="new-game-footer col-12 align-self-end px-4 py-3">
-          <button class="btn btn-info px-5 rounded-pill border-dark btn-shadow"
-          type="submit"
-          [disabled]="!f.valid || legsToWin.value < 3">
-            Create match
-          </button>
-          <button
-            class="btn btn-info px-5 rounded-pill border-dark btn-shadow"
-            [disabled]="loadedMatch || actualGame ? false : true"
-            (click)="onBackToScorePanel(true)"
-          >
-            Back
-          </button>
-        </div>
-      </div>
-    </form>
+  <form class="col" (ngSubmit)="onSubmit()" #f="ngForm">
+    <div class="row">
+      <label class="col-3" for="player1Id">Player 1</label>
+      <select class="col-auto" name="player1Id" ngModel required>
+        <option class="choose-a-player-title" value="" disabled>
+          Choose a player
+        </option>
+        <option
+          class="choose-a-player-item"
+          *ngFor="let player1 of players"
+          [value]="player1.playerId"
+          [disabled]="
+            player1.playerId === newGameForm.value.player2Id ? true : false
+          "
+        >
+          {{ player1.playerId }}
+        </option>
+      </select>
+    </div>
+    <div class="row">
+      <label class="col-3" for="player2Id">Player 2</label>
+      <select class="col-auto" name="player2Id" ngModel required>
+        <option class="choose-a-player-title" value="" disabled>
+          Choose a player
+        </option>
+        <option
+          class="choose-a-player-item"
+          *ngFor="let player2 of players"
+          [value]="player2.playerId"
+          [disabled]="
+            player2.playerId === newGameForm.value.player1Id ? true : false
+          "
+        >
+          {{ player2.playerId }}
+        </option>
+      </select>
+    </div>
+    <div class="row">
+      <label class="col-3" for="legsToWin">Legs to win</label>
+      <input
+        class="col-2 text-center"
+        name="legsToWin"
+        type="number"
+        id="legsToWin"
+        [ngModel]="defaultLegsToWin"
+        required
+        min="3"
+        max="20"
+        value="3"
+        #legsToWin="ngModel"
+      />
+      <span *ngIf="legsToWin.value < 3 ? true : false" class="help-block"
+        >Minimum value is 3!</span
+      >
+      <span *ngIf="legsToWin.value > 20 ? true : false" class="help-block"
+        >Maximum value is 20!</span
+      >
+    </div>
+  </form>
+  <div class="new-game-footer col-12 align-self-end px-4 py-3">
+    <button
+      class="btn btn-info px-5 rounded-pill border-dark btn-shadow"
+      type="submit"
+      [disabled]="!f.valid || legsToWin.value < 3 || legsToWin.value > 20"
+    >
+      Create match
+    </button>
+    <button
+      class="btn btn-info px-5 rounded-pill border-dark btn-shadow"
+      [disabled]="loadedMatch || actualGame ? false : true"
+      (click)="onBackToScorePanel(true)"
+    >
+      Back
+    </button>
   </div>
 </div>

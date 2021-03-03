@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ThemeService } from './shared/themes/theme.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'darts';
+
+  constructor(private themeService: ThemeService) {}
+
+  changeTheme(name: string) {
+    this.themeService.setTheme(name);
+    console.log("set theme")
+  }
+
 }
