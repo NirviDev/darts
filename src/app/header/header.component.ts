@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AppComponent } from '../app.component';
+import { Theme } from '../shared/themes/symbols';
+
 import { ThemeService } from '../shared/themes/theme.service';
 
 @Component({
@@ -10,14 +11,21 @@ import { ThemeService } from '../shared/themes/theme.service';
 export class HeaderComponent implements OnInit {
 
   public navCollapsed = true;
+  public activeTheme: string = "";
 
-  constructor(private appComponent: AppComponent) {}
+  constructor(private themeService: ThemeService) {}
 
   ngOnInit(): void {
+    this.themeService.themeChanged.subscribe(
+      (theme: Theme) => {
+        this.activeTheme = theme.name;
+        console.log(this.activeTheme)
+      }
+    );
   }
 
-  onChangeTheme(name: string) {
-    this.appComponent.changeTheme(name);
+  changeTheme(name: string) {
+    this.themeService.setTheme(name);
   }
 
 }

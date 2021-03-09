@@ -1,0 +1,161 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="-125 -125 250 250"
+  version="1.1">
+  <defs>
+    <path id="inner" (click)="onClick(this.parentNode.getAttribute('data-sector'), 1)"
+          d="M-3 -20 A20 20 0 0 1 3 -20 L8 -49 A50 50 0 0 0 -8 -49Z">
+    <path id="tripple" (click)="onClick(this.parentNode.getAttribute('data-sector'), 3)"
+          d="M-8 -49 A50 50 0 0 1 8 -49 L9 -59 A60 60 0 0 0 -9 -59Z">
+    <path id="outer" (click)="onClick(this.parentNode.getAttribute('data-sector'), 1)"
+          d="M-9 -59 A60 60 0 0 1 9 -59 L14 -89 A90 90 0 0 0 -14 -89Z">
+    <path id="double" (click)="onClick(this.parentNode.getAttribute('data-sector'), 2)"
+          d="M-14 -89 A90 90 0 0 1 14 -89 L16 -99 A100 100 0 0 0 -16 -99Z">
+  </defs>
+
+  <circle r="125" class="black"/>
+  <g stroke-width="1" stroke="#CFCFC4">
+    <circle r="20" class="green"/>
+    <circle r="9" class="red"/>
+    <g data-sector="20">
+      <use xlink:href="#inner" class="black"/>
+      <use xlink:href="#tripple" class="red"/>
+      <use xlink:href="#outer" class="black"/>
+      <use xlink:href="#double" class="red"/>
+      <text x="0" y="-110">20</text>
+    </g>
+    <g data-sector="1" transform="rotate(18)">
+      <use xlink:href="#inner" class="white"/>
+      <use xlink:href="#tripple" class="green"/>
+      <use xlink:href="#outer" class="white"/>
+      <use xlink:href="#double" class="green"/>
+      <text x="0" y="-110">1</text>
+    </g>
+    <g data-sector="18" transform="rotate(36)">
+      <use xlink:href="#inner" class="black"/>
+      <use xlink:href="#tripple" class="red"/>
+      <use xlink:href="#outer" class="black"/>
+      <use xlink:href="#double" class="red"/>
+      <text x="0" y="-110">18</text>
+    </g>
+    <g data-sector="4" transform="rotate(54)">
+      <use xlink:href="#inner" class="white"/>
+      <use xlink:href="#tripple" class="green"/>
+      <use xlink:href="#outer" class="white"/>
+      <use xlink:href="#double" class="green"/>
+      <text x="0" y="-110">4</text>
+    </g>
+    <g data-sector="13" transform="rotate(72)">
+      <use xlink:href="#inner" class="black"/>
+      <use xlink:href="#tripple" class="red"/>
+      <use xlink:href="#outer" class="black"/>
+      <use xlink:href="#double" class="red"/>
+      <text x="0" y="-110">13</text>
+    </g>
+    <g data-sector="6" transform="rotate(90)">
+      <use xlink:href="#inner" class="white"/>
+      <use xlink:href="#tripple" class="green"/>
+      <use xlink:href="#outer" class="white"/>
+      <use xlink:href="#double" class="green"/>
+      <text x="0" y="-110">6</text>
+    </g>
+    <g data-sector="10" transform="rotate(108)">
+      <use xlink:href="#inner" class="black"/>
+      <use xlink:href="#tripple" class="red"/>
+      <use xlink:href="#outer" class="black"/>
+      <use xlink:href="#double" class="red"/>
+      <text x="0" y="-110">10</text>
+    </g>
+    <g data-sector="15" transform="rotate(126)">
+      <use xlink:href="#inner" class="white"/>
+      <use xlink:href="#tripple" class="green"/>
+      <use xlink:href="#outer" class="white"/>
+      <use xlink:href="#double" class="green"/>
+      <text x="0" y="-110">15</text>
+    </g>
+    <g data-sector="2" transform="rotate(144)">
+      <use xlink:href="#inner" class="black"/>
+      <use xlink:href="#tripple" class="red"/>
+      <use xlink:href="#outer" class="black"/>
+      <use xlink:href="#double" class="red"/>
+      <text x="0" y="-110">2</text>
+    </g>
+    <g data-sector="17" transform="rotate(162)">
+      <use xlink:href="#inner" class="white"/>
+      <use xlink:href="#tripple" class="green"/>
+      <use xlink:href="#outer" class="white"/>
+      <use xlink:href="#double" class="green"/>
+      <text x="0" y="-110">17</text>
+    </g>
+    <g data-sector="3" transform="rotate(180)">
+      <use xlink:href="#inner" class="black"/>
+      <use xlink:href="#tripple" class="red"/>
+      <use xlink:href="#outer" class="black"/>
+      <use xlink:href="#double" class="red"/>
+      <text x="0" y="-110">3</text>
+    </g>
+    <g data-sector="19" transform="rotate(-162)">
+      <use xlink:href="#inner" class="white"/>
+      <use xlink:href="#tripple" class="green"/>
+      <use xlink:href="#outer" class="white"/>
+      <use xlink:href="#double" class="green"/>
+      <text x="0" y="-110">19</text>
+    </g>
+    <g data-sector="7" transform="rotate(-144)">
+      <use xlink:href="#inner" class="black"/>
+      <use xlink:href="#tripple" class="red"/>
+      <use xlink:href="#outer" class="black"/>
+      <use xlink:href="#double" class="red"/>
+      <text x="0" y="-110">7</text>
+    </g>
+    <g data-sector="16" transform="rotate(-126)">
+      <use xlink:href="#inner" class="white"/>
+      <use xlink:href="#tripple" class="green"/>
+      <use xlink:href="#outer" class="white"/>
+      <use xlink:href="#double" class="green"/>
+      <text x="0" y="-110">16</text>
+    </g>
+    <g data-sector="8" transform="rotate(-108)">
+      <use xlink:href="#inner" class="black"/>
+      <use xlink:href="#tripple" class="red"/>
+      <use xlink:href="#outer" class="black"/>
+      <use xlink:href="#double" class="red"/>
+      <text x="0" y="-110">8</text>
+    </g>
+    <g data-sector="11" transform="rotate(-90)">
+      <use xlink:href="#inner" class="white"/>
+      <use xlink:href="#tripple" class="green"/>
+      <use xlink:href="#outer" class="white"/>
+      <use xlink:href="#double" class="green"/>
+      <text x="0" y="-110">11</text>
+    </g>
+    <g data-sector="14" transform="rotate(-72)">
+      <use xlink:href="#inner" class="black"/>
+      <use xlink:href="#tripple" class="red"/>
+      <use xlink:href="#outer" class="black"/>
+      <use xlink:href="#double" class="red"/>
+      <text x="0" y="-110">14</text>
+    </g>
+    <g data-sector="9" transform="rotate(-54)">
+      <use xlink:href="#inner" class="white"/>
+      <use xlink:href="#tripple" class="green"/>
+      <use xlink:href="#outer" class="white"/>
+      <use xlink:href="#double" class="green"/>
+      <text x="0" y="-110">9</text>
+    </g>
+    <g data-sector="12" transform="rotate(-36)">
+      <use xlink:href="#inner" class="black"/>
+      <use xlink:href="#tripple" class="red"/>
+      <use xlink:href="#outer" class="black"/>
+      <use xlink:href="#double" class="red"/>
+      <text x="0" y="-110">12</text>
+    </g>
+    <g data-sector="5" transform="rotate(-18)">
+      <use xlink:href="#inner" class="white"/>
+      <use xlink:href="#tripple" class="green"/>
+      <use xlink:href="#outer" class="white"/>
+      <use xlink:href="#double" class="green"/>
+      <text x="0" y="-110">5</text>
+    </g>
+  </g>
+</svg>

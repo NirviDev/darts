@@ -11,9 +11,4 @@ export class AppComponent {
 
   constructor(private themeService: ThemeService) {}
 
-  changeTheme(name: string) {
-    this.themeService.setTheme(name);
-    console.log("set theme")
-  }
-
 }

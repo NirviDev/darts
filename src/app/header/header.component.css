@@ -1,3 +1,23 @@
 nav {
-  background-color: var(--nav);
+  background-color: var(--nav-bg);
+}
+
+.dropdown-menu {
+  background-color: var(--score-panel);
+}
+
+#nav-dropdown, #nav-dropdown *{
+  color: var(--text);
+}
+
+#nav-dropdown .btn:focus {
+  box-shadow: 0 0 0 0.1rem rgba(255, 255, 255, 0.3);
+}
+
+.dart-arrow {
+  height: 2rem;
+}
+
+.pnext {
+  fill: white;
 }
